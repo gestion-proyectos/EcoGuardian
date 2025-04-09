@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 # EcoGuardian
+=======
+# 🌿 EcoGuardian
+>>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
 
 **EcoGuardian** es una aplicación web que permite a los ciudadanos consultar la calidad del aire en tiempo real, reportar eventos ambientales (como incendios, contaminación o polen) y recibir alertas de salud personalizadas según sus condiciones (asma, deporte, etc.).  
 El proyecto está enfocado en una **zona geográfica específica** y busca fomentar la participación ciudadana en el cuidado del medio ambiente.
 
 ---
 
+<<<<<<< HEAD
 ## Descripción del Proyecto
+=======
+## 🧾 Descripción del Proyecto
+>>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
 
 El propósito principal de EcoGuardian es proporcionar una herramienta útil, educativa y accionable para las personas que quieren conocer el estado del aire en su entorno, proteger su salud y tomar decisiones informadas.  
 
@@ -45,7 +53,11 @@ A través de una plataforma sencilla y accesible, el sistema muestra mapas, perm
 ## 🌐 Prototipo
 
 Puedes visualizar un prototipo inicial en Figma:  
+<<<<<<< HEAD
 🔗 [Prototipo EcoGuardian](https://www.figma.com/proto/3gqMd3edEjIf25vP4GZGiY/EcoGuardian?node-id=22-8&t=bIS0fmMzYwTap3u7-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=22%3A8)
+=======
+🔗 [Prototipo EcoGuardian](https://www.figma.com/proto/o4m8Wlj5tJOq97UGAT53SA/EcoRecicla-(Community)?node-id=37-255)
+>>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
 
 ---
 
@@ -55,3 +67,7 @@ Este proyecto es de código abierto bajo la licencia [MIT](https://opensource.or
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
