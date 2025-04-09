@@ -68,6 +68,9 @@ Este proyecto es de código abierto bajo la licencia [MIT](https://opensource.or
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
+=======
+>>>>>>> 2dbb316 (README)
