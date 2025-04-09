@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login - EcoGuardian</title>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Iniciar Sesión</h2>
+      
+      {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+
+      <form method="POST" action="{{ url_for('idvistalogin.vista_login')}}">
+        <div class="form-group">
+          <label>Usuario:</label>
+          <input type="text" name="username" required /><br />
+        </div>
+        <div class="form-group">
+          <label>Contraseña:</label>
+          <input type="password" name="password" required /><br />
+        </div>
+        <button type="submit" class="submit-btn">Iniciar sesión</button>
+      </form>
+      <a href="{{ url_for('menu.menu_view')}}">Volver al menú</a>
+    </div>
+  </body>
+</html>

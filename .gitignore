@@ -1,0 +1,9 @@
+# Ignorar el entorno virtual
+env/
+__pycache__/
+
+# Archivos innecesarios
+*.pyc
+*.pyo
+*.log
+.DS_Store
