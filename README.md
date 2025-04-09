@@ -1,19 +1,11 @@
-<<<<<<< HEAD
-# EcoGuardian
-=======
 # 🌿 EcoGuardian
->>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
 
 **EcoGuardian** es una aplicación web que permite a los ciudadanos consultar la calidad del aire en tiempo real, reportar eventos ambientales (como incendios, contaminación o polen) y recibir alertas de salud personalizadas según sus condiciones (asma, deporte, etc.).  
 El proyecto está enfocado en una **zona geográfica específica** y busca fomentar la participación ciudadana en el cuidado del medio ambiente.
 
 ---
 
-<<<<<<< HEAD
-## Descripción del Proyecto
-=======
 ## 🧾 Descripción del Proyecto
->>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
 
 El propósito principal de EcoGuardian es proporcionar una herramienta útil, educativa y accionable para las personas que quieren conocer el estado del aire en su entorno, proteger su salud y tomar decisiones informadas.  
 
@@ -23,7 +15,25 @@ A través de una plataforma sencilla y accesible, el sistema muestra mapas, perm
 
 ## 📁 Estructura del Proyecto
 
-
+```plaintext
+EcoGuardian/
+├── app/                            # Lógica principal de la aplicación
+│   ├── __init__.py                 # Inicializa la app y carga configuraciones
+│   ├── routes.py                   # Definición de rutas y controladores
+│   ├── models.py                   # Modelos de base de datos (SQLAlchemy)
+│   ├── services/                   # Lógica modular (ej. notificaciones, reportes)
+│   │   └── air_quality.py
+│   └── templates/                  # Plantillas HTML (Jinja2)
+│       └── index.html
+├── static/                         # Archivos estáticos: CSS, JS, imágenes
+│   ├── css/
+│   └── js/
+├── config.py                       # Configuración global del proyecto
+├── .env                            # Variables de entorno (API keys, DB, etc.)
+├── requirements.txt               # Dependencias del proyecto
+├── run.py                          # Punto de entrada para ejecutar la app
+└── README.md                       # Documentación del proyecto
+```````
 
 ---
 
@@ -43,7 +53,7 @@ A través de una plataforma sencilla y accesible, el sistema muestra mapas, perm
 - El desarrollo del proyecto se organiza usando **GitHub Projects**.
 - El enfoque está limitado a una **zona geográfica específica** para mejorar la precisión del análisis.
 - El proyecto está en etapa de desarrollo activo; algunos módulos aún están en construcción.
-- Se utiliza **Django** como framework backend y **PostgreSQL** como sistema de base de datos.
+- Se utiliza **Flask** como framework backend y **PostgreSQL** como sistema de base de datos.
 - Puedes contribuir siguiendo la estructura del proyecto, generando ramas y enviando pull requests.
 
 ---
@@ -53,24 +63,10 @@ A través de una plataforma sencilla y accesible, el sistema muestra mapas, perm
 ## 🌐 Prototipo
 
 Puedes visualizar un prototipo inicial en Figma:  
-<<<<<<< HEAD
 🔗 [Prototipo EcoGuardian](https://www.figma.com/proto/3gqMd3edEjIf25vP4GZGiY/EcoGuardian?node-id=22-8&t=bIS0fmMzYwTap3u7-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=22%3A8)
-=======
-🔗 [Prototipo EcoGuardian](https://www.figma.com/proto/o4m8Wlj5tJOq97UGAT53SA/EcoRecicla-(Community)?node-id=37-255)
->>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
 
 ---
 
 ## 📄 Licencia
 
 Este proyecto es de código abierto bajo la licencia [MIT](https://opensource.org/licenses/MIT).
-
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> bb880ad (Actualizacion del README con descripcion del proyecto)
-=======
->>>>>>> 2dbb316 (README)
