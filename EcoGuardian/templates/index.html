@@ -226,6 +226,11 @@
     .welcome-container {
       margin-left: 32%;
     }
+
+    .login-required {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
   </style>
 
 </head>
@@ -238,23 +243,23 @@
       <img src="{{ url_for('static', filename='img/logo.png')}}" class="eco-guardian" />
       <div class="eco-guardian">EcoGuardian</div>
     </div>
-
-    <div onclick="showMiniMenu('eventos')" class="frame-252 trigger-btn" style="cursor: pointer;">
+    <!-- <div onclick="showMiniMenu('eventos')" class="frame-252 trigger-btn" style="cursor: pointer;"> -->
+    <div onclick="checkSession('eventos')" class="frame-252 trigger-btn" style="cursor: pointer;">
       <img src="{{ url_for('static', filename='img/ecoeventos.png')}}" class="icon">
       <div class="ecoeventos">ECOEVENTOS</div>
     </div>
-
-    <div onclick="showMiniMenu('rutas')" class="frame-253 trigger-btn" style="cursor: pointer;">
+    <!-- <div onclick="showMiniMenu('rutas')" class="frame-253 trigger-btn" style="cursor: pointer;"> -->
+    <div onclick="checkSession('rutas')" class="frame-253 trigger-btn" style="cursor: pointer;">
       <img src="{{ url_for('static', filename='img/rutas.png')}}" class="icon">
       <div class="rutas">RUTAS</div>
     </div>
-
-    <div onclick="showMiniMenu('reportes')" class="frame-254 trigger-btn" style="cursor: pointer;">
+    <!-- <div onclick="showMiniMenu('reportes')" class="frame-254 trigger-btn" style="cursor: pointer;"> -->
+    <div onclick="checkSession('reportes')" class="frame-254 trigger-btn" style="cursor: pointer;">
       <img src="{{ url_for('static', filename='img/reporte.png')}}" class="icon">
       <div class="reportar">Reportar</div>
     </div>
-
-    <div onclick="showMiniMenu('usuarios')" class="frame-255 trigger-btn" style="cursor: pointer;">
+    <!-- <div onclick="showMiniMenu('usuarios')" class="frame-255 trigger-btn" style="cursor: pointer;"> -->
+    <div onclick="checkSession('usuarios')" class="frame-255 trigger-btn" style="cursor: pointer;">
       <img src="{{ url_for('static', filename='img/usuario.png')}}" class="icon">
       <div class="nombre-usuario">Usuario</div>
     </div>
@@ -274,6 +279,21 @@
 
 
 <script>
+  // Verificar si hay una sesión activa
+  function isLoggedIn() {
+    return "{{ session.get('username') }}" !== "";
+  }
+
+  // Función para verificar la sesión antes de mostrar el menú
+  function checkSession(type) {
+    if (!isLoggedIn()) {
+      // Redirigir al login si no hay sesión
+      window.location.href = "{{ url_for('idvistalogin.vista_login') }}";
+      return;
+    }
+    showMiniMenu(type);
+  }
+
   function showMiniMenu(type) {
     const menu = document.getElementById('miniMenu');
     const content = document.getElementById('miniMenuContent');
@@ -286,30 +306,34 @@
 
     if (type === 'eventos') {
       items = [
-        { label: 'Ver puntos de incendio', link: '/eventos/ver' },
-        { label: 'ver zonas con alta contaminación', link: '/eventos/crear' },
-        { label: 'ver zonas con polen', link: '/eventos/calendario' }
+        { label: 'Ver puntos de incendio', link: '/ver_incendios' },
+        { label: 'ver zonas con alta contaminación', link: '/ver_contaminacion' },
+        { label: 'ver zonas con polen', link: '/ver_polen' }
       ];
       menu.classList.add('menu-ecoeventos');
     } else if (type === 'rutas') {
       items = [
-        { label: 'Ver rutas guardadas', link: '/rutas/ver' },
-        { label: 'Iniciar ruta guardada', link: '/rutas/nueva' },
-        { label: 'Añadir ruta', link: '/rutas/favoritas' }
+        { label: 'Ver rutas guardadas', link: '/ver_rutas_guardadas' },
+        { label: 'Iniciar ruta guardada', link: '/iniciar_ruta' },
+        { label: 'Añadir ruta', link: '/añadir_ruta' }
       ];
       menu.classList.add('menu-rutas');
     } else if (type === 'reportes') {
       items = [
-        { label: 'Incendios', link: '/reportes/ver' },
-        { label: 'Contaminación alta', link: '/reportes/nuevo' },
-        { label: 'polen', link: '/reportes/historial' }
+        { label: 'Incendios', link: '/reportar_incendio' },
+        { label: 'Contaminación alta', link: '/reportar_contaminacion' },
+        { label: 'polen', link: '/reportar_polen' }
       ];
       menu.classList.add('menu-reportes');
     } else if (type === 'usuarios') {
       items = [
-        { label: 'iniciar sesion', link: '/login' },
-        { label: 'Registrate', link: '/registro' }
+        
+      /* { label: 'iniciar sesion', link: '/login' },
+        { label: 'Registrate', link: '/registro' } */
         /* { label: 'user3', link: '/reportes/historial' } */
+        { label: 'iniciarsesion(breve)', link: '/login' },
+        { label: 'Editar perfil', link: "{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}" },
+        { label: 'Cerrar sesión', link: "{{ url_for('home.logout') }}" }
       ];
       menu.classList.add('menu-usuarios');
     }

@@ -9,9 +9,24 @@ from vista.vistalogin import vistalogin
 from vista.vistaregistro import vistaregistro
 from vista.vista_registro1 import vistaregistro1
 from vista.vistahome import vistahome
-from vista.vistaprueba import vistaprueba
 from vista.vistaeditarperfil import vistaeditarperfil
 
+from vista.vistaprueba import vistaprueba
+
+"""EcoEventos"""
+from vista.vistavercontaminacion import vistavercontaminacion
+from vista.vistaverincendios import vistaverincenidos
+from vista.vistaverpolen import vistaverpolen
+
+"""Rutas"""
+from vista.vistaverrutasguardadas import vistaverrutasguardadas
+from vista.vistainiciarruta import vistainiciarruta
+from vista.vistaañadirruta import vistaañadirruta
+
+"""Reportar"""
+from vista.vistareportarincendio import vistareportarincendio
+from vista.vistareportarcontamincacion import vistareportarcontamincacion
+from vista.vistareportarpolen import vistareportarpolen
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -26,6 +41,18 @@ app.register_blueprint(vistaregistro1)
 app.register_blueprint(vistahome)
 app.register_blueprint(vistaprueba)
 app.register_blueprint(vistaeditarperfil)
+app.register_blueprint(vistavercontaminacion)
+app.register_blueprint(vistaverincenidos)
+app.register_blueprint(vistaverpolen)
+
+app.register_blueprint(vistaverrutasguardadas)
+app.register_blueprint(vistainiciarruta)
+app.register_blueprint(vistaañadirruta)
+
+
+app.register_blueprint(vistareportarincendio)
+app.register_blueprint(vistareportarcontamincacion)
+app.register_blueprint(vistareportarpolen)
 
 # Vista de logout
 def logout_view(request):
