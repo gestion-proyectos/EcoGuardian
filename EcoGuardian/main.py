@@ -7,7 +7,10 @@ from configBd import *
 from menu import menu
 from vista.vistalogin import vistalogin
 from vista.vistaregistro import vistaregistro
+from vista.vista_registro1 import vistaregistro1
 from vista.vistahome import vistahome
+from vista.vistaprueba import vistaprueba
+from vista.vistaeditarperfil import vistaeditarperfil
 
 
 app = Flask(__name__)
@@ -19,11 +22,14 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=10)
 app.register_blueprint(menu)  # Este debe ser el primero para que la ruta raíz muestre el menú
 app.register_blueprint(vistalogin)
 app.register_blueprint(vistaregistro)
+app.register_blueprint(vistaregistro1)
 app.register_blueprint(vistahome)
+app.register_blueprint(vistaprueba)
+app.register_blueprint(vistaeditarperfil)
 
 # Vista de logout
-""" def logout_view(request):
-    return redirect('login') """
+def logout_view(request):
+    return redirect('login')
 
 # Vista del menú principal
 def vista_menu():

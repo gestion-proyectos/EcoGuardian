@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Título de la página{% endblock %}</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #354E24;
+      font-family: Arial, sans-serif;
+    }
+
+    .sidebar {
+      border-radius: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 57px;
+      align-items: center;
+      justify-content: center;
+      margin-left: -62%;
+      top: 0%;
+      width: 500px;
+      height: auto;
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .frame-252,
+    .frame-253,
+    .frame-254,
+    .frame-255 {
+      border-radius: 41px;
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      align-items: center;
+      margin-top: 175px;
+      margin-left: -20%;
+      margin-bottom: -auto;
+      justify-content: center;
+      width: 310px;
+      height: 75px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .frame-252 {
+      background: #3b69af;
+      margin-top: 175px;
+      margin-bottom: -40%;
+    }
+
+    .frame-253 {
+      background: #ffffff;
+      margin-bottom: -40%;
+      height: 90px;
+    }
+
+    .frame-254 {
+      background: #a9000e;
+      margin-bottom: -40%;
+      height: 90px;
+    }
+
+    .frame-255 {
+      background: #00426a;
+      padding: 17px 24px;
+    }
+
+    .ecoeventos,
+    .rutas,
+    .reportar,
+    .nombre-usuario {
+      text-align: center;
+      font-family: "Inter-Regular", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .ecoeventos,
+    .nombre-usuario,
+    .reportar {
+      color: #ffffff;
+    }
+
+    .rutas {
+      color: #000000;
+    }
+
+    .fondo-logo {
+      border-radius: 40px;
+      padding: 0px 73px;
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+      align-items: center;
+      justify-content: flex-start;
+      width: 390px;
+      position: absolute;
+      left: 3px;
+      top: 15px;
+      box-shadow: 9px 9px 5.2px 0px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      background-image: url('/static/img/fondo_logo.png');
+      background-size: cover;
+    }
+
+    .eco-guardian {
+      color: #ffffff;
+      text-align: center;
+      font-family: "Inter-Black", sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      position: relative;
+    }
+
+    .icon {
+      width: 30px;
+      /* Aumenta el tamaño del ícono para hacerlo más visible */
+      height: 30px;
+      margin-left: 20px;
+      /* Ajusta la posición del ícono a la derecha */
+    }
+
+    .mini-menu {
+      position: absolute;
+      top: 100px;
+      left: 25%;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      z-index: 999;
+      width: 180px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .mini-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mini-menu li {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .mini-menu li:last-child {
+      border-bottom: none;
+    }
+
+    .mini-menu li:hover {
+      background-color: #f0f0f0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .menu-ecoeventos {
+      background-color: #3b69af;
+      color: white;
+      margin-left: 7.5%;
+    }
+
+    .menu-rutas {
+      background-color: #6c757d;
+      color: white;
+      margin-left: 7.5%;
+      margin-top: 9%;
+    }
+
+    .menu-reportes {
+      background-color: #dc3545;
+      color: white;
+      margin-left: 7.5%;
+      margin-top: 19%;
+    }
+
+    .menu-usuarios {
+      background-color: #00426A;
+      color: white;
+      margin-left: 7.5%;
+      margin-top: 28.3%;
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+    }
+
+    #map {
+      width: 68%;
+      height: 80vh;
+      /* Usa porcentaje de la altura de la pantalla */
+      margin-left: 32%;
+      border-radius: 20px;
+      margin-top: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      #map {
+        height: 40vh;
+        border-radius: 10px;
+      }
+    }
+
+    .welcome-container {
+      margin-left: 32%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+
+    <div class="fondo-logo">
+      <img src="{{ url_for('static', filename='img/logo.png')}}" class="eco-guardian" />
+      <div class="eco-guardian">EcoGuardian</div>
+    </div>
+
+    <div onclick="showMiniMenu('eventos')" class="frame-252 trigger-btn" style="cursor: pointer;">
+      <img src="{{ url_for('static', filename='img/ecoeventos.png')}}" class="icon">
+      <div class="ecoeventos">ECOEVENTOS</div>
+    </div>
+
+    <div onclick="showMiniMenu('rutas')" class="frame-253 trigger-btn" style="cursor: pointer;">
+      <img src="{{ url_for('static', filename='img/rutas.png')}}" class="icon">
+      <div class="rutas">RUTAS</div>
+    </div>
+
+    <div onclick="showMiniMenu('reportes')" class="frame-254 trigger-btn" style="cursor: pointer;">
+      <img src="{{ url_for('static', filename='img/reporte.png')}}" class="icon">
+      <div class="reportar">Reportar</div>
+    </div>
+
+    <div onclick="showMiniMenu('usuarios')" class="frame-255 trigger-btn" style="cursor: pointer;">
+      <img src="{{ url_for('static', filename='img/usuario.png')}}" class="icon">
+      <div class="nombre-usuario">Usuario</div>
+    </div>
+
+  </div>
+
+  <div id="miniMenu" class="mini-menu hidden">
+    <ul id="miniMenuContent"></ul>
+  </div>
+
+  <div class="content">
+    {% block content %}
+    <!-- El contenido de la página se inyectará aquí -->
+    {% endblock %}
+  </div>
+</body>
+
+
+<script>
+  function showMiniMenu(type) {
+    const menu = document.getElementById('miniMenu');
+    const content = document.getElementById('miniMenuContent');
+    content.innerHTML = '';
+
+    // Limpia el contenido anterior
+    menu.classList.remove('menu-ecoeventos', 'menu-rutas', 'menu-reportes', 'menu-usuarios');
+
+    let items = [];
+
+    if (type === 'eventos') {
+      items = [
+        { label: 'Ver puntos de incendio', link: '/eventos/ver' },
+        { label: 'ver zonas con alta contaminación', link: '/eventos/crear' },
+        { label: 'ver zonas con polen', link: '/eventos/calendario' }
+      ];
+      menu.classList.add('menu-ecoeventos');
+    } else if (type === 'rutas') {
+      items = [
+        { label: 'Ver rutas guardadas', link: '/rutas/ver' },
+        { label: 'Iniciar ruta guardada', link: '/rutas/nueva' },
+        { label: 'Añadir ruta', link: '/rutas/favoritas' }
+      ];
+      menu.classList.add('menu-rutas');
+    } else if (type === 'reportes') {
+      items = [
+        { label: 'Incendios', link: '/reportes/ver' },
+        { label: 'Contaminación alta', link: '/reportes/nuevo' },
+        { label: 'polen', link: '/reportes/historial' }
+      ];
+      menu.classList.add('menu-reportes');
+    } else if (type === 'usuarios') {
+      items = [
+        { label: 'iniciar sesion', link: '/login' },
+        { label: 'Registrate', link: '/registro' }
+        /* { label: 'user3', link: '/reportes/historial' } */
+      ];
+      menu.classList.add('menu-usuarios');
+    }
+
+    items.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item.label;
+      li.onclick = () => {
+        window.location.href = item.link;
+      };
+      content.appendChild(li);
+    });
+
+    menu.classList.remove('hidden');
+  }
+
+  // Ocultar el mini menú si haces clic fuera
+  document.addEventListener('click', function (e) {
+    const menu = document.getElementById('miniMenu');
+    if (!menu.contains(e.target) && !e.target.classList.contains('trigger-btn')) {
+      menu.classList.add('hidden');
+    }
+  });
+</script>
+
+
+</html>

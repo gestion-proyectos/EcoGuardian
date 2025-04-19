@@ -7,11 +7,11 @@ import markupsafe, requests
 #import markupsafe, requests, bcrypt
 
 # Crear un Blueprint
-vistaregistro = Blueprint('idvistaregistro', __name__, template_folder='templates')
+vistaregistro1 = Blueprint('idvistaregistro1', __name__, template_folder='templates')
  
-@vistaregistro.route('/registro', methods=['GET', 'POST'])
+@vistaregistro1.route('/registro1', methods=['GET', 'POST'])
 
-def vista_registro():
+def vista_registro1():
 
 
-    return render_template('registro.html')
+    return render_template('registro1.html')
