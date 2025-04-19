@@ -1,7 +1,6 @@
 # 🌿 EcoGuardian
 
-**EcoGuardian** es una aplicación web que permite a los ciudadanos consultar la calidad del aire en tiempo real, reportar eventos ambientales (como incendios, contaminación o polen) y recibir alertas de salud personalizadas según sus condiciones (asma, deporte, etc.).  
-El proyecto está enfocado en una **zona geográfica específica** y busca fomentar la participación ciudadana en el cuidado del medio ambiente.
+**EcoGuardian** es una aplicación web que permite a los ciudadanos consultar rutas optimizadas entre dos puntos fijos, evitando zonas afectadas por eventos ambientales nocivos para la salud, como contaminación, incendios. Estas alertas son generadas en tiempo real a partir de reportes ciudadanos.
 
 ---
 
@@ -57,6 +56,9 @@ EcoGuardian/
 - Puedes contribuir siguiendo la estructura del proyecto, generando ramas y enviando pull requests.
 
 ---
+## 🎯 Objetivo del Proyecto
+
+Desarrollar un modelo de optimización de rutas entre dos puntos fijos georreferenciados, utilizando datos ambientales reportados por los usuarios en el territorio. El objetivo es evitar zonas con eventos nocivos para la salud y así ofrecer alternativas más seguras para la movilidad ciudadana.
 
 ---
 
