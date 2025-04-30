@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, session, flash, send_file, r
 import os, io, xlsxwriter, requests
 from datetime import timedelta
 from configBd import *
+from vista.vistalogin import login_manager
 
 from menu import menu
 from vista.vistalogin import vistalogin
@@ -33,6 +34,9 @@ app.secret_key = os.urandom(24)
 #app.secret_key = 'b14ca5898a4e4133bbce2ea2315a1916'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=10)
 
+# Inicializar LoginManager
+login_manager.init_app(app)
+
 # Registrar los blueprints
 app.register_blueprint(menu)  # Este debe ser el primero para que la ruta raíz muestre el menú
 app.register_blueprint(vistalogin)
@@ -48,7 +52,6 @@ app.register_blueprint(vistaverpolen)
 app.register_blueprint(vistaverrutasguardadas)
 app.register_blueprint(vistainiciarruta)
 app.register_blueprint(vistaañadirruta)
-
 
 app.register_blueprint(vistareportarincendio)
 app.register_blueprint(vistareportarcontamincacion)

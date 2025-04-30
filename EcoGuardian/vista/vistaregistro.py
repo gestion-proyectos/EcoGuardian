@@ -4,7 +4,8 @@ import requests
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 from configBd import *
 import markupsafe, requests
-#import markupsafe, requests, bcrypt
+
+from control.ControlConexion import ControlConexion
 
 # Crear un Blueprint
 vistaregistro = Blueprint('idvistaregistro', __name__, template_folder='templates')
