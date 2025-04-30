@@ -3,7 +3,7 @@
 {% block title %}Menú{% endblock %}
 
 {% block content %}
-<h1 style="color: white; margin-left: 32%;">Bienvenido a EcoGuardian</h1>
+<h1 style="color: white; margin-left: 17%; font-size: 20px;">Bienvenido a EcoGuardian donde puedes encontar y reportar eventos ambientales en tiempo real</h1>
 
 <!-- Contenedor del mapa -->
 <div id="map"></div>
@@ -23,12 +23,12 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-<!-- Script para inicializar el mapa -->
-<script>
-    var map = L.map('map').setView([6.2447, -75.5748], 10);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-</script>
+<!-- Estilo css -->
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+{% endblock %}
+
+    <!-- Base JS -->
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+
 {% endblock %}

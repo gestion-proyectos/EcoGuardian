@@ -178,31 +178,9 @@
         </form>
     </div>
 
-    <script>
-        function moveFrame(event, section) {
-            const frame31 = document.getElementById('frame31');
-            const buttons = document.querySelectorAll('.menu-button');
 
-            // Remueve clase activa
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // Agrega clase activa al clicado
-            event.target.classList.add('active');
-
-            // Contenido dinámico
-            switch (section) {
-                case 'datos':
-                    frame31.innerHTML = 'Datos personales';
-                    break;
-                case 'condiciones':
-                    frame31.innerHTML = 'Condiciones de salud';
-                    break;
-                case 'estilo':
-                    frame31.innerHTML = 'Estilo de vida activo';
-                    break;
-            }
-        }
-    </script>
+<!-- Base JS -->
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
 </body>
 
 </html>

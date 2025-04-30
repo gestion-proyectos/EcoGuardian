@@ -7,4 +7,12 @@
 <h1 style="margin-left: 500px; color: aqua;">Hola reportar polen >:|</h1>
 
 
+<!-- Estilo css -->
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+{% endblock %}
+
+<!-- Base JS -->
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+
 {% endblock %}
