@@ -59,4 +59,9 @@
 <!-- Base JS -->
 <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 
+<script>
+  const logoutUrl = "{{ url_for('idvistalogin.logout') }}";
+  const editarPerfilUrl = "{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}";
+</script>
+
 </html>

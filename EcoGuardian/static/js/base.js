@@ -96,9 +96,9 @@ function showMiniMenu(type) {
 
   } else if (type === 'usuarios') {
     items = [
-      { label: 'iniciarsesion(breve)', link: '/login' },
-      { label: 'Editar perfil', link: "{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}" },
-      { label: 'Cerrar sesión', link: "{{ url_for('home.logout') }}" }
+      { label: 'Iniciar sesión', link: '/login' },
+      { label: 'Editar perfil', link: editarPerfilUrl },
+      { label: 'Cerrar sesión', link: logoutUrl }
     ];
     menu.classList.add('menu-usuarios');
   }
