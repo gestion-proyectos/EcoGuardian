@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+
+{% block title %}Reporte Contaminación{% endblock %}
+
+{% block content %}
+
+<h1 style="margin-left: 500px; color: rgb(255, 255, 255); font-size: 15px;">Reportes de Contaminación</h1>
+
+<div class="cuadro-reporte-contaminacion">
+    <form method="POST" action="{{ url_for('idvistareportarcontamincacion.vista_reportarcontamincacion') }}">
+        <div class="form-group">
+            <label for="calle_afectada">Ubicación de la zona contaminada:</label>
+            <input type="text" id="calle_afectada" name="calle_afectada" required>
+        </div>
+
+        <div class="form-group">
+            <label for="severidad">Nivel de severidad (1-5):</label>
+            <select id="severidad" name="severidad" required>
+                <option value="1">1 - Muy leve</option>
+                <option value="2">2 - Leve</option>
+                <option value="3">3 - Moderado</option>
+                <option value="4">4 - Grave</option>
+                <option value="5">5 - Muy grave</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción del incidente:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Reportar Contaminación</button>
+    </form>
+
+    <!-- <a href="{{ url_for('home.vista_home')}}" class="submit-btn">Inicio</a> -->
+
+</div>
+
+<div id="map"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<!-- Estilo css -->
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+{% endblock %}
+
+<!-- Base JS -->
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+
+{% endblock %}
