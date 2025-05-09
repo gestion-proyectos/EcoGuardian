@@ -1,6 +1,6 @@
 # main.py
 from flask import Flask, render_template, redirect, session, flash, send_file, request, url_for
-import os, io, xlsxwriter, requests
+import os, io, xlsxwriter, requests, app
 from datetime import timedelta
 from configBd import *
 from vista.vistalogin import login_manager
