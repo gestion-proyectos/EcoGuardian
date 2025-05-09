@@ -223,15 +223,15 @@
             <img src="{{ url_for('static', filename='img/ecoguardian.png')}}" class="EcoGuardian" />
         </div>
 
-        <!-- Mensajes flash aquí, justo debajo de las imágenes -->
+        <!-- Mensajes flash -->
         {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            <ul class="messages">
-              {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endwith %}
 
         <div class="frame-30">

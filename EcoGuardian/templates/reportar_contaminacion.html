@@ -7,6 +7,14 @@
 <h1 style="margin-left: 500px; color: rgb(255, 255, 255); font-size: 15px;">Reportes de Contaminación</h1>
 
 <div class="cuadro-reporte-contaminacion">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <form method="POST" action="{{ url_for('idvistareportarcontamincacion.vista_reportarcontamincacion') }}">
         <div class="form-group">
             <label for="calle_afectada">Ubicación de la zona contaminada:</label>
