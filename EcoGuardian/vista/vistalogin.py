@@ -64,17 +64,18 @@ def vista_login():
                 resultado = conexion.ejecutarSelect(sql, [correo])
                 
                 if resultado and len(resultado) > 0:
-                    # Autenticación exitosa
-                    #user = User(resultado[0]['id'], resultado[0]['usuario'])
-                    user = User(resultado[0]['id_usuario'], resultado[0]['correo'])
-                    login_user(user)
-                    flash('¡Bienvenido! Has iniciado sesión correctamente.', 'success')
-                    #print(f"[DEBUG] Login exitoso - Usuario: {usuario}")
-                    print(f"[DEBUG] Login exitoso - Usuario: {correo}")
-                    return redirect(url_for('home.vista_home'))
+                    if contrasena == resultado[0]['contrasena']:
+                        user = User(resultado[0]['id_usuario'], resultado[0]['correo'])
+                        login_user(user)
+                        # flash('¡Bienvenido! Has iniciado sesión correctamente.', 'success')
+                        print(f"[DEBUG] Login exitoso - Usuario: {correo}")
+                        return redirect(url_for('home.vista_home'))
+                    else:
+                        flash('Usuario o contraseña incorrectos.', 'error')
+                        print("[DEBUG] Fallo en login - Contraseña incorrecta")
                 else:
                     flash('Usuario o contraseña incorrectos.', 'error')
-                    print("[DEBUG] Fallo en login - Credenciales incorrectas")
+                    print("[DEBUG] Fallo en login - Usuario no encontrado")
                 
                 conexion.cerrarBd()
                 

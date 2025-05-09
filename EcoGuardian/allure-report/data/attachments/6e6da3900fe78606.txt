@@ -1,2 +1,0 @@
-[DEBUG] Intento de login - Usuario: test_user
-[DEBUG] Fallo en login - Credenciales incorrectas

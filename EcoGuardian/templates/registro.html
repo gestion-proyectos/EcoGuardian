@@ -52,38 +52,63 @@
             width: 45%;
             margin: 0 5px;
         }
+
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        .messages li {
+            color: #721c24;
+            background-color: #f8d7da;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .messages li.success {
+            color: #155724;
+            background-color: #d4edda;
+        }
+        .messages li.error {
+            color: #721c24;
+            background-color: #f8d7da;
+        }
     </style>
 </head>
 
 <body>
     <div class="form-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="messages">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
         <h2>Login</h2>
-        <form>
-            <!-- Anadir el required en estas opciones -->
+        <form method="POST" action="{{ url_for('idvistaregistro.vista_registro') }}">
             <div class="form-group">
-                <label>nombre:</label>
-                <input type="text">
+                <label>Nombre:</label>
+                <input type="text" name="nombre" required>
             </div>
             <div class="form-group">
-                <label>Correo electronico:</label>
-                <input type="email" id="email" name="email">
+                <label>Correo electrónico:</label>
+                <input type="email" name="correo" required>
             </div>
             <div class="form-group">
                 <label>Contraseña:</label>
-                <input type="password" id="password" name="password">
+                <input type="password" name="password" required>
             </div>
             <div class="form-group">
                 <label>Confirmar contraseña:</label>
-                <input type="password" id="password" name="password">
+                <input type="password" name="confirmar_password" required>
             </div>
-
-            <!-- Añadir type="submit" en este boton -->
-
             <div class="button-group">
-                 <a href="{{ url_for('idvistaregistro1.vista_registro1')}}" class="submit-btn">Siguiente</a>
-                </div>
-
-
+                <button type="submit" class="submit-btn">Siguiente</button>
+            </div>
             <p>¿Ya tienes una cuenta creada?</p><a href="{{ url_for('idvistalogin.vista_login')}}"
                 class="menu-link">Inicia
                 sesión</a>

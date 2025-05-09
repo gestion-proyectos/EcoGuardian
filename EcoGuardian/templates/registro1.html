@@ -101,43 +101,36 @@
 
 <body>
     <div class="form-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="messages">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
         <div class="frame">
             <img src="{{ url_for('static', filename='img/fondo_logo.png')}}" class="image" />
             <img src="{{ url_for('static', filename='img/logo.png')}}" class="logo" />
             <img src="{{ url_for('static', filename='img/ecoguardian.png')}}" class="EcoGuardian" />
         </div>
         <!-- <h2>Login</h2> -->
-        <form>
-            <!-- Anadir el required en estas opciones -->
+        <form method="POST" action="{{ url_for('idvistaregistro1.vista_registro1') }}">
             <p><strong>¿Tienes alguna de estas condiciones?</strong></p>
             <div class="form-group">
-                <label>Problemas respiratorios</label>
-                <input type="checkbox">
-                <label>Alergico al polen</label>
-                <input type="checkbox">
+                <label><input type="checkbox" name="condiciones" value="Problemas respiratorios"> Problemas respiratorios</label>
+                <label><input type="checkbox" name="condiciones" value="Alergico al polen"> Alergico al polen</label>
+                <label><input type="checkbox" name="condiciones" value="Te afecta la contaminación"> Te afecta la contaminación</label>
             </div>
+            <p><strong>¿Cuál es tu estilo de vida?</strong></p>
             <div class="form-group">
-                <label>Te afecta la contaminación</label>
-                <input type="checkbox">
+                <label><input type="checkbox" name="estilo_vida" value="Deportista al aire libre"> Deportista al aire libre</label>
+                <label><input type="checkbox" name="estilo_vida" value="Caminar"> Caminar</label>
+                <label><input type="checkbox" name="estilo_vida" value="Montas bicicleta"> Montas bicicleta</label>
             </div>
-
-            <p><strong>¿Cúal es tu estilo de vida?</strong></p>
-
-            <div class="form-group">
-                <label>Deportista al aire libre</label>
-                <input type="checkbox">
-                <label>Caminar</label>
-                <input type="checkbox">
-            </div>
-            <div class="form-group">
-                <label>Montas bicicleta</label>
-                <input type="checkbox">
-            </div>
-
-            <!-- Añadir type="submit" en este boton -->
-
-            <div class="submit-btn">
-                <a href="{{ url_for('home.vista_home')}}" class="submit-btn">Siguiente</a>
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Siguiente</button>
             </div>
         </form>
     </div>

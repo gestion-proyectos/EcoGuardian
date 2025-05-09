@@ -1,6 +1,6 @@
 # main.py
 from flask import Flask, render_template, redirect, session, flash, send_file, request, url_for
-import os, io, xlsxwriter, requests, app
+import os, io, xlsxwriter, requests
 from datetime import timedelta
 from configBd import *
 from vista.vistalogin import login_manager
@@ -10,7 +10,11 @@ from vista.vistalogin import vistalogin
 from vista.vistaregistro import vistaregistro
 from vista.vista_registro1 import vistaregistro1
 from vista.vistahome import vistahome
+
+"""editarperfil"""
 from vista.vistaeditarperfil import vistaeditarperfil
+from vista.vistaeditarcondiciones import vistaeditarcondiciones
+from vista.vistaeditarestilo import vistaeditarestilo
 
 from vista.vistaprueba import vistaprueba
 
@@ -48,6 +52,8 @@ app.register_blueprint(vistaeditarperfil)
 app.register_blueprint(vistavercontaminacion)
 app.register_blueprint(vistaverincenidos)
 app.register_blueprint(vistaverpolen)
+app.register_blueprint(vistaeditarcondiciones)
+app.register_blueprint(vistaeditarestilo)
 
 app.register_blueprint(vistaverrutasguardadas)
 app.register_blueprint(vistainiciarruta)

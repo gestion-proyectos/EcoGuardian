@@ -19,7 +19,7 @@
 
 
         .form-container {
-            background: rgba(255, 255, 255, 0.842);
+            background: rgba(255, 255, 255, 0.9);
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -94,6 +94,9 @@
             padding: 10px 15px;
             border-radius: 20px;
             transition: all 0.3s ease;
+            text-decoration: none;
+            color: black;
+            display: inline-block;
         }
 
         .menu-button.active {
@@ -120,19 +123,95 @@
             margin-bottom: 0.3rem;
         }
 
-        .form-group input {
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
             width: 100%;
             padding: 0.4rem;
             border: 1px solid #ccc;
             border-radius: 8px;
         }
 
-        .button-group a {
-            display: inline-block;
-            margin-top: 1rem;
-            text-decoration: none;
-            color: purple;
+        .button-group {
+            text-align: center;
         }
+
+        .button-group button {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            background: #4A90E2;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .nav-links a {
+            display: block;
+            margin: 0.5rem 0;
+            color: #4A90E2;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #1E4C7C;
+        }
+
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .success {
+            color: #155724;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .error {
+            color: #721c24;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .button-group .btn-home {
+            display: inline-block;
+            margin-left: 1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            background: #aaa;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border: none;
+            transition: background 0.2s;
+        }
+        .button-group .btn-home:hover {
+            background: #333;
+        }
+        .button-group button,
+        .button-group .btn-home {
+             font-family: Arial, sans-serif;
+             font-size: 14px;
+             font-weight: bold;
+             text-align: center;
+             text-decoration: none;
+}
     </style>
 </head>
 
@@ -144,40 +223,87 @@
             <img src="{{ url_for('static', filename='img/ecoguardian.png')}}" class="EcoGuardian" />
         </div>
 
+        <!-- Mensajes flash aquí, justo debajo de las imágenes -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="messages">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
         <div class="frame-30">
-            <button class="menu-button active" onclick="moveFrame(event, 'datos')">Datos personales</button>
-            <button class="menu-button" onclick="moveFrame(event, 'condiciones')">Condiciones de salud</button>
-            <button class="menu-button" onclick="moveFrame(event, 'estilo')">Estilo de vida activo</button>
+            <a href="{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}" class="menu-button {% if active_tab == 'datos' %}active{% endif %}">Datos personales</a>
+            <a href="{{ url_for('idvistaeditarcondiciones.editar_condiciones') }}" class="menu-button {% if active_tab == 'condiciones' %}active{% endif %}">Condiciones de salud</a>
+            <a href="{{ url_for('idvistaeditarestilo.editar_estilo') }}" class="menu-button {% if active_tab == 'estilo' %}active{% endif %}">Estilo de vida activo</a>
         </div>
 
-        <!--         <div class="frame-31" id="frame31">
-            Datos personales
-        </div>
- -->
-        <form>
+        <!-- Formulario de datos personales -->
+        <form id="form-datos" method="POST" action="{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}">
+            <input type="hidden" name="form_type" value="datos">
             <div class="form-group">
                 <label>Nombre:</label>
-                <input type="text" required>
+                <input type="text" name="nombre" required value="{{ datos.nombre if datos else '' }}">
             </div>
             <div class="form-group">
                 <label>Correo electrónico:</label>
-                <input type="email" required>
+                <input type="email" name="correo" required value="{{ datos.correo if datos else '' }}">
             </div>
             <div class="form-group">
                 <label>Contraseña:</label>
-                <input type="password" required>
+                <input type="password" name="password">
             </div>
             <div class="form-group">
                 <label>Confirmar contraseña:</label>
-                <input type="password" required>
+                <input type="password" name="confirmar_password">
             </div>
-
             <div class="button-group">
-                <a href="{{ url_for('home.vista_home') }}">Guardar</a>
+                <button type="submit">Guardar</button>
+                <a href="{{ url_for('home.vista_home') }}" class="btn-home">Volver</a>
             </div>
         </form>
+
+        <!-- Formulario de condiciones de salud -->
+        <form id="form-condiciones" method="POST" action="{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}" style="display:none;">
+            <input type="hidden" name="form_type" value="condiciones">
+            <div class="form-group">
+                <label>Condiciones de salud:</label><br>
+                <label><input type="checkbox" name="perfil_salud" value="asmático" {% if 'asmático' in datos.perfil_salud %}checked{% endif %}> Asmático</label><br>
+                <label><input type="checkbox" name="perfil_salud" value="Alergico al polen" {% if 'Alergico al polen' in datos.perfil_salud %}checked{% endif %}> Alérgico al polen</label><br>
+                <label><input type="checkbox" name="perfil_salud" value="deportista" {% if 'deportista' in datos.perfil_salud %}checked{% endif %}> Deportista</label>
+            </div>
+            <div class="button-group">
+                <button type="submit">Guardar</button>
+            </div>
+        </form>
+
+        <!-- Formulario de estilo de vida -->
+        <form id="form-estilo" method="POST" action="{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}" style="display:none;">
+            <input type="hidden" name="form_type" value="estilo">
+            <div class="form-group">
+                <label>Estilo de vida:</label><br>
+                <label><input type="checkbox" name="estilo_vida" value="camina" {% if 'camina' in datos.estilo_vida %}checked{% endif %}> Camina</label><br>
+                <label><input type="checkbox" name="estilo_vida" value="deportista_al_aire_libre" {% if 'deportista_al_aire_libre' in datos.estilo_vida %}checked{% endif %}> Deportista al aire libre</label>
+            </div>
+            <div class="button-group">
+                <button type="submit">Guardar</button>
+            </div>
+        </form>
+
+
     </div>
 
+    <script>
+    function moveFrame(event, section) {
+        document.querySelectorAll('.menu-button').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        document.getElementById('form-datos').style.display = section === 'datos' ? '' : 'none';
+        document.getElementById('form-condiciones').style.display = section === 'condiciones' ? '' : 'none';
+        document.getElementById('form-estilo').style.display = section === 'estilo' ? '' : 'none';
+    }
+    </script>
 
 <!-- Base JS -->
 <script src="{{ url_for('static', filename='js/base.js') }}"></script>
