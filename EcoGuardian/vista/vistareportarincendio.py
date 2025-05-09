@@ -2,8 +2,8 @@ from pprint import pprint
 import requests
 from datetime import datetime
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
-from configBd import *
-from control.ControlConexion import ControlConexion
+from EcoGuardian.configBd import *
+from EcoGuardian.control.ControlConexion import ControlConexion
 import markupsafe, requests
 from flask_login import login_required, current_user
 import json

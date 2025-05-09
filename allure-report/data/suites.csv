@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","0","test_pytest_detecta","tests","Thu May 08 22:18:22 COT 2025","passed","Thu May 08 22:18:22 COT 2025","","test_eco_guardian","",""
+"Verifica que un usuario pueda iniciar sesión correctamente","188","Prueba de inicio de sesión exitoso","tests","Thu May 08 22:18:21 COT 2025","failed","Thu May 08 22:18:21 COT 2025","TestEcoGuardian","test_eco_guardian","",""
+"Verifica que las rutas protegidas redirijan al login cuando no hay sesión","2","Prueba de acceso a rutas protegidas","tests","Thu May 08 22:18:22 COT 2025","failed","Thu May 08 22:18:22 COT 2025","TestEcoGuardian","test_eco_guardian","",""
+"Verifica que un nuevo usuario pueda registrarse correctamente","5","Prueba de registro de usuario","tests","Thu May 08 22:18:22 COT 2025","failed","Thu May 08 22:18:22 COT 2025","TestEcoGuardian","test_eco_guardian","",""
+"Verifica que el usuario pueda cerrar sesión correctamente","6","Prueba de cierre de sesión","tests","Thu May 08 22:18:22 COT 2025","failed","Thu May 08 22:18:22 COT 2025","TestEcoGuardian","test_eco_guardian","",""
+"Verifica que la página de inicio se cargue correctamente","30","Prueba de acceso a la página de inicio","tests","Thu May 08 22:18:21 COT 2025","passed","Thu May 08 22:18:21 COT 2025","TestEcoGuardian","test_eco_guardian","",""

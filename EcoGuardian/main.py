@@ -2,32 +2,30 @@
 from flask import Flask, render_template, redirect, session, flash, send_file, request, url_for
 import os, io, xlsxwriter, requests
 from datetime import timedelta
-from configBd import *
-from vista.vistalogin import login_manager
+from .configBd import *
+from .vista.vistalogin import login_manager
 
-from menu import menu
-from vista.vistalogin import vistalogin
-from vista.vistaregistro import vistaregistro
-from vista.vista_registro1 import vistaregistro1
-from vista.vistahome import vistahome
-from vista.vistaeditarperfil import vistaeditarperfil
-
-from vista.vistaprueba import vistaprueba
+from EcoGuardian.menu import menu
+from EcoGuardian.vista.vistalogin import vistalogin
+from EcoGuardian.vista.vistaregistro import vistaregistro
+from EcoGuardian.vista.vista_registro1 import vistaregistro1
+from EcoGuardian.vista.vistahome import vistahome
+from EcoGuardian.vista.vistaeditarperfil import vistaeditarperfil
 
 """EcoEventos"""
-from vista.vistavercontaminacion import vistavercontaminacion
-from vista.vistaverincendios import vistaverincenidos
-from vista.vistaverpolen import vistaverpolen
+from EcoGuardian.vista.vistavercontaminacion import vistavercontaminacion
+from EcoGuardian.vista.vistaverincendios import vistaverincenidos
+from EcoGuardian.vista.vistaverpolen import vistaverpolen
 
 """Rutas"""
-from vista.vistaverrutasguardadas import vistaverrutasguardadas
-from vista.vistainiciarruta import vistainiciarruta
-from vista.vistaañadirruta import vistaañadirruta
+from EcoGuardian.vista.vistaverrutasguardadas import vistaverrutasguardadas
+from EcoGuardian.vista.vistainiciarruta import vistainiciarruta
+from EcoGuardian.vista.vistaañadirruta import vistaañadirruta
 
 """Reportar"""
-from vista.vistareportarincendio import vistareportarincendio
-from vista.vistareportarcontamincacion import vistareportarcontamincacion
-from vista.vistareportarpolen import vistareportarpolen
+from EcoGuardian.vista.vistareportarincendio import vistareportarincendio
+from EcoGuardian.vista.vistareportarcontamincacion import vistareportarcontamincacion
+from EcoGuardian.vista.vistareportarpolen import vistareportarpolen
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -43,7 +41,6 @@ app.register_blueprint(vistalogin)
 app.register_blueprint(vistaregistro)
 app.register_blueprint(vistaregistro1)
 app.register_blueprint(vistahome)
-app.register_blueprint(vistaprueba)
 app.register_blueprint(vistaeditarperfil)
 app.register_blueprint(vistavercontaminacion)
 app.register_blueprint(vistaverincenidos)
