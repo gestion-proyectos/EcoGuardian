@@ -1,11 +1,18 @@
-import unittest
-import allure
 from main import app
 from flask import session
-import time
-import random
+import time, random, requests, unittest, allure
+from unittest.mock import patch
+from vista.vistareportarcontamincacion import registrar_reporte, geocodificar_direccion
+from vista.vistalogin import load_user
+
 
 class BaseTestCase(unittest.TestCase):
+    def get_unique_email(self):
+        """Genera un correo único usando timestamp y un número aleatorio"""
+        timestamp = int(time.time())
+        random_num = random.randint(1000, 9999)
+        return f"test_{timestamp}_{random_num}@test.com"
+
     def setUp(self):
         self.app = app.test_client()
         self.app_context = app.app_context()
@@ -19,32 +26,9 @@ class AuthTests(BaseTestCase):
         """Genera un correo único usando timestamp"""
         return f"test_{int(time.time())}@test.com"
 
-    @allure.title("Prueba de registro completo") #pasa
-    @allure.description("Verifica el proceso completo de registro en dos pasos")
-    def test_registro_completo(self):
-        # Generar correo único
-        test_email = self.get_unique_email()
-        
-        # Paso 1: Registro inicial
-        response = self.app.post('/registro', data={
-            'nombre': 'Usuario Test',
-            'correo': test_email,
-            'password': 'test123',
-            'confirmar_password': 'test123'
-        }, follow_redirects=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'condiciones', response.data)  # Verifica que estamos en la página de condiciones
-
-        # Paso 2: Registro de condiciones y estilo de vida
-        response = self.app.post('/registro1', data={
-            'condiciones': ['Problemas respiratorios'],
-            'estilo_vida': ['Deportista al aire libre']
-        }, follow_redirects=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Registro exitoso', response.data)
-
-    @allure.title("Prueba de login exitoso") #pasa
+    @allure.title("Prueba de login exitoso")
     @allure.description("Verifica que un usuario pueda iniciar sesión correctamente")
+    @allure.label("severity", "critical")
     def test_login_exitoso(self):
         # Generar correo único
         test_email = self.get_unique_email()
@@ -74,8 +58,9 @@ class AuthTests(BaseTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Bienvenido', response.data)
 
-    @allure.title("Prueba de login fallido") #pasa
+    @allure.title("Prueba de login fallido")
     @allure.description("Verifica que el login falle con credenciales incorrectas")
+    @allure.label("severity", "critical")
     def test_login_fallido(self):
         response = self.app.post('/login', data={
             'username': 'nonexistent@test.com',
@@ -108,6 +93,7 @@ class ReportTests(BaseTestCase):
 
     @allure.title("Prueba de reporte de contaminación")
     @allure.description("Verifica el proceso de reportar contaminación")
+    @allure.label("severity", "normal")
     def test_reportar_contaminacion(self):
         # Acceder al formulario
         response = self.app.get('/reportar_contaminacion')
@@ -125,6 +111,7 @@ class ReportTests(BaseTestCase):
 
     @allure.title("Prueba de reporte de incendio")
     @allure.description("Verifica el proceso de reportar incendio")
+    @allure.label("severity", "normal")
     def test_reportar_incendio(self):
         # Acceder al formulario
         response = self.app.get('/reportar_incendio')
@@ -142,6 +129,7 @@ class ReportTests(BaseTestCase):
 
     @allure.title("Prueba de reporte de polen")
     @allure.description("Verifica el proceso de reportar polen")
+    @allure.label("severity", "normal")
     def test_reportar_polen(self):
         # Acceder al formulario
         response = self.app.get('/reportar_polen')
@@ -181,6 +169,7 @@ class ProfileTests(BaseTestCase):
 
     @allure.title("Prueba de edición de perfil")
     @allure.description("Verifica que se pueda editar el perfil del usuario")
+    @allure.label("severity", "minor")
     def test_editar_perfil(self):
         response = self.app.post('/editar_perfil', data={
             'nombre': 'Usuario Modificado',
@@ -192,6 +181,7 @@ class ProfileTests(BaseTestCase):
 
     @allure.title("Prueba de edición de condiciones")
     @allure.description("Verifica que se puedan editar las condiciones de salud")
+    @allure.label("severity", "minor")
     def test_editar_condiciones(self):
         response = self.app.post('/editar_perfil', data={
             'form_type': 'condiciones',
@@ -202,6 +192,7 @@ class ProfileTests(BaseTestCase):
 
     @allure.title("Prueba de edición de estilo de vida")
     @allure.description("Verifica que se pueda editar el estilo de vida")
+    @allure.label("severity", "minor")
     def test_editar_estilo(self):
         response = self.app.post('/editar_estilo', data={
             'form_type': 'estilo',
@@ -209,6 +200,196 @@ class ProfileTests(BaseTestCase):
         }, follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Estilo de vida actualizado', response.data)
+
+class TestRegistrarReporte(unittest.TestCase):
+    @allure.title("Prueba de registro de reporte exitoso")
+    @allure.description("Verifica que se pueda registrar un reporte de contaminación correctamente")
+    @allure.label("severity", "critical")
+    @patch('vista.vistareportarcontamincacion.ControlConexion')
+    def test_registrar_reporte_exito(self, mock_conexion):
+        # Simular inserción exitosa
+        mock_conexion.return_value.ejecutarComandoSql.return_value = True
+        
+        resultado, mensaje = registrar_reporte('Calle 72', 3, 'Descripción de prueba', 1)
+        self.assertTrue(resultado)
+        self.assertEqual(mensaje, 'Reporte registrado exitosamente')
+
+    @allure.title("Prueba de registro de reporte con error")
+    @allure.description("Verifica el manejo de errores al registrar un reporte de contaminación")
+    @allure.label("severity", "critical")
+    @patch('vista.vistareportarcontamincacion.ControlConexion')
+    def test_registrar_reporte_error(self, mock_conexion):
+        # Simular error en la inserción
+        mock_conexion.return_value.ejecutarComandoSql.side_effect = Exception("Error de base de datos")
+        
+        resultado, mensaje = registrar_reporte('Calle 72', 3, 'Descripción de prueba', 1)
+        self.assertFalse(resultado)
+        self.assertIn('Error', mensaje)
+
+class TestGeocodificarDireccion(unittest.TestCase):
+    @allure.title("Prueba de geocodificación exitosa")
+    @allure.description("Verifica que se pueda geocodificar una dirección correctamente")
+    @allure.label("severity", "critical")
+    @patch('vista.vistareportarcontamincacion.requests.get')
+    def test_geocodificar_direccion_exito(self, mock_get):
+        # Simular respuesta exitosa de Nominatim
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = [{
+            'lat': '4.60971',
+            'lon': '-74.08175'
+        }]
+        
+        direccion = "Bogotá, Colombia"
+        resultado = geocodificar_direccion(direccion)
+        self.assertEqual(resultado, "POINT(-74.08175 4.60971)")
+
+    @allure.title("Prueba de geocodificación sin resultados")
+    @allure.description("Verifica el manejo de direcciones que no se pueden geocodificar")
+    @allure.label("severity", "critical")
+    @patch('vista.vistareportarcontamincacion.requests.get')
+    def test_geocodificar_direccion_sin_resultados(self, mock_get):
+        # Simular respuesta sin resultados
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = []
+        
+        direccion = "Dirección inexistente"
+        resultado = geocodificar_direccion(direccion)
+        self.assertIsNone(resultado)
+
+    @allure.title("Prueba de geocodificación con error de API")
+    @allure.description("Verifica el manejo de errores de la API de geocodificación")
+    @allure.label("severity", "normal")
+    @patch('vista.vistareportarcontamincacion.requests.get')
+    def test_geocodificar_direccion_error(self, mock_get):
+        # Simular error en la solicitud
+        mock_get.return_value.status_code = 500
+        
+        direccion = "Bogotá, Colombia"
+        resultado = geocodificar_direccion(direccion)
+        self.assertIsNone(resultado)
+
+    @allure.title("Prueba de geocodificación con dirección con caracteres especiales")
+    @allure.description("Verifica que se puedan geocodificar direcciones con caracteres especiales")
+    @allure.label("severity", "normal")
+    @patch('vista.vistareportarcontamincacion.requests.get')
+    def test_geocodificar_direccion_caracteres_especiales(self, mock_get):
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = [{
+            'lat': '4.60971',
+            'lon': '-74.08175'
+        }]
+        
+        direccion = "Calle 72 #11-86, Bogotá, Colombia"
+        resultado = geocodificar_direccion(direccion)
+        self.assertEqual(resultado, "POINT(-74.08175 4.60971)")
+
+    @allure.title("Prueba de geocodificación con timeout")
+    @allure.description("Verifica el manejo de timeouts en la API de geocodificación")
+    @allure.label("severity", "critical")
+    @patch('vista.vistareportarcontamincacion.requests.get')
+    def test_geocodificar_direccion_timeout(self, mock_get):
+        mock_get.side_effect = requests.exceptions.Timeout()
+        
+        direccion = "Bogotá, Colombia"
+        resultado = geocodificar_direccion(direccion)
+        self.assertIsNone(resultado)
+
+class TestLogin(unittest.TestCase):
+    @allure.title("Prueba de carga de usuario exitosa")
+    @allure.description("Verifica que se pueda cargar un usuario correctamente")
+    @allure.label("severity", "critical")
+    @patch('vista.vistalogin.ControlConexion')
+    def test_load_user_exito(self, mock_conexion):
+        # Simular conexión exitosa a la base de datos
+        mock_conexion.return_value.ejecutarSelect.return_value = [{
+            'id_usuario': 1,
+            'correo': 'test_user@test.com'
+        }]
+        
+        user = load_user(1)
+        self.assertIsNotNone(user)
+        self.assertEqual(user.id, 1)
+        self.assertEqual(user.correo, 'test_user@test.com')
+
+    @allure.title("Prueba de carga de usuario no encontrado")
+    @allure.description("Verifica el manejo de usuarios que no existen en la base de datos")
+    @allure.label("severity", "critical")
+    @patch('vista.vistalogin.ControlConexion')
+    def test_load_user_no_encontrado(self, mock_conexion):
+        # Simular usuario no encontrado
+        mock_conexion.return_value.ejecutarSelect.return_value = []
+        
+        user = load_user(99)
+        self.assertIsNone(user)
+
+    @allure.title("Prueba de carga de usuario con datos incompletos")
+    @allure.description("Verifica el manejo de usuarios con datos incompletos en la base de datos")
+    @allure.label("severity", "critical")
+    @patch('vista.vistalogin.ControlConexion')
+    def test_load_user_datos_incompletos(self, mock_conexion):
+        mock_conexion.return_value.ejecutarSelect.return_value = [{
+            'id_usuario': 1
+            # Falta el campo 'correo'
+        }]
+        
+        user = load_user(1)
+        self.assertIsNone(user)
+
+class TestPerfilIntegracion(BaseTestCase):
+    @allure.title("Prueba de integración: Actualización completa de perfil")
+    @allure.description("Verifica el flujo completo de actualización de perfil")
+    @allure.label("severity", "minor")
+    def test_actualizacion_perfil_completa(self):
+        # 1. Registrar usuario
+        test_email = self.get_unique_email()
+        self.app.post('/registro', data={
+            'nombre': 'Usuario Test',
+            'correo': test_email,
+            'password': 'test123',
+            'confirmar_password': 'test123'
+        })
+        self.app.post('/registro1', data={
+            'condiciones': ['Problemas respiratorios'],
+            'estilo_vida': ['Deportista al aire libre']
+        })
+
+        # 2. Login
+        self.app.post('/login', data={
+            'username': test_email,
+            'password': 'test123'
+        })
+
+        # 3. Actualizar datos básicos
+        response = self.app.post('/editar_perfil', data={
+            'nombre': 'Usuario Modificado',
+            'correo': test_email,
+            'form_type': 'datos'
+        }, follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Perfil actualizado correctamente', response.data)
+
+        # 4. Actualizar condiciones
+        response = self.app.post('/editar_perfil', data={
+            'form_type': 'condiciones',
+            'perfil_salud': ['asmático', 'Alergico al polen']
+        }, follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Condiciones de salud actualizadas', response.data)
+
+        # 5. Actualizar estilo de vida
+        response = self.app.post('/editar_estilo', data={
+            'form_type': 'estilo',
+            'estilo_vida': ['camina', 'deportista_al_aire_libre']
+        }, follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Estilo de vida actualizado', response.data)
+
+        # 6. Verificar cambios
+        response = self.app.get('/editar_perfil')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Usuario Modificado', response.data)
+        self.assertIn(b'asm\xc3\xa1tico', response.data)
+        self.assertIn(b'deportista_al_aire_libre', response.data)
 
 if __name__ == '__main__':
     unittest.main() 

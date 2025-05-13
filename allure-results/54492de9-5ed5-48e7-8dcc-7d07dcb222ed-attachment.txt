@@ -1,0 +1,5 @@
+Datos de sesión: None None None
+Condiciones: ['Problemas respiratorios']
+Estilo de vida: ['Deportista al aire libre']
+[DEBUG] Intento de login - Usuario: test_1746894656@test.com
+[DEBUG] Login exitoso - Usuario: test_1746894656@test.com

@@ -1,3 +1,0 @@
-Datos de sesión: Usuario Test test_1746810930_9305@test.com test123
-Condiciones: ['Problemas respiratorios']
-Estilo de vida: ['Deportista al aire libre']

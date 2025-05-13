@@ -1,0 +1,2 @@
+[DEBUG] Intento de login - Usuario: nonexistent@test.com
+[DEBUG] Fallo en login - Usuario no encontrado
