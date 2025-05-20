@@ -30,8 +30,19 @@ body {
   position: fixed;
   top: 30px;
   left: 30px;
-  z-index: 2000;
+  z-index: 3000;
   margin: 0;
+}
+
+.sidebar {
+  pointer-events: none;
+}
+.sidebar .fondo-logo,
+.sidebar .frame-252,
+.sidebar .frame-253,
+.sidebar .frame-254,
+.sidebar .frame-255 {
+  pointer-events: auto;
 }
 
 /* Botones del menú más angostos */
@@ -156,7 +167,7 @@ body {
   background-color: #0288D1;
   background-color: rgba(1, 53, 82, 0.85); /* azul con transparencia */
   color: white;
-  margin-left: -6%;
+  margin-left: 75%;
   margin-top: -2%;
 }
 
@@ -164,24 +175,24 @@ body {
   background-color: #F5F5DC;
   background-color: rgba(96, 96, 86, 0.85); /* blanco con transparencia */
   color: white;
-  margin-left: -6%;
-  margin-top: 4%;
+  margin-left: 75%;
+  margin-top: 30%;
 }
 
 .menu-reportes {
   background-color: #D9534F;
   background-color: rgba(217, 83, 79, 0.85); /* Rojo con transparencia */
   color: white;
-  margin-left: -6%;
-  margin-top: 8.5%;
+  margin-left: 75%;
+  margin-top: 55%;
 }
 
 .menu-usuarios {
   background-color: #2F4858;
   background-color: rgba(18, 28, 35, 0.85); /* azul oscuro con transparencia */
   color: white;
-  margin-left: -6%;
-  margin-top: 13%;
+  margin-left: 75%;
+  margin-top: 80%;
 }
 
 /* Ajustes para el contenido principal si lo necesitas */
