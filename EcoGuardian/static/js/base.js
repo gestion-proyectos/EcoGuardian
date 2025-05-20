@@ -79,6 +79,7 @@ function showMiniMenu(type) {
   } else if (type === 'rutas') {
     items = [
       { label: 'Inciar', link: '/ver_rutas_guardadas' },
+      { label: 'Sabaneta', link: '/rutas' },
       /*         { label: 'Iniciar ruta guardada', link: '/iniciar_ruta' },
               { label: 'Añadir ruta', link: '/añadir_ruta' } */
     ];

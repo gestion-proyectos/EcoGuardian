@@ -195,6 +195,13 @@ body {
   margin-top: 80%;
 }
 
+.menu-ecoeventos, .menu-usuarios, .menu-rutas, .menu-reportes {
+  pointer-events: none;
+}
+.menu-ecoeventos, .menu-usuarios, .menu-rutas, .menu-reportes {
+  pointer-events: auto;
+}
+
 /* Ajustes para el contenido principal si lo necesitas */
 .content {
   flex: 1;
@@ -299,6 +306,13 @@ z-index: 1000;
   cursor: pointer;
   transition: 0.3s ease;
   margin-right: 10px;
+}
+
+.cuadro-reporte, .cuadro-reporte-contaminacion {
+  pointer-events: none;
+}
+.cuadro-reporte, .cuadro-reporte-contaminacion {
+  pointer-events: auto;
 }
 
 /* Efecto hover para botones */

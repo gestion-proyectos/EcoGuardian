@@ -28,6 +28,7 @@ from vista.vistaverpolen import vistaverpolen
 from vista.vistaverrutasguardadas import vistaverrutasguardadas
 from vista.vistainiciarruta import vistainiciarruta
 from vista.vistaañadirruta import vistaañadirruta
+from vista.vistarutas import vistarutas
 
 """Reportar"""
 from vista.vistareportarincendio import vistareportarincendio
@@ -60,6 +61,7 @@ app.register_blueprint(api)
 app.register_blueprint(vistaverrutasguardadas)
 app.register_blueprint(vistainiciarruta)
 app.register_blueprint(vistaañadirruta)
+app.register_blueprint(vistarutas)
 
 app.register_blueprint(vistareportarincendio)
 app.register_blueprint(vistareportarcontamincacion)
