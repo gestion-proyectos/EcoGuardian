@@ -3,13 +3,16 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<div class="welcome-container">
-    <h2 style="font-size: 20px;">Bienvenido
-        <a href="{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}" >perfil</a>
-        , {{ usuario }}!
-        <a href="{{ url_for('home.logout') }}" class="logout-link">Cerrar sesión</a>
-    </h2>
-</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="messages">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}

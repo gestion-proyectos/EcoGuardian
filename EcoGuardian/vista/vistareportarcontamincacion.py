@@ -42,49 +42,60 @@ def geocodificar_direccion(direccion):
         print(f"Dirección que causó el error: {direccion}")
         return None
 
+def registrar_reporte(calle_afectada, severidad, descripcion, usuario_reporta):
+    try:
+        # Geocodificar la dirección
+        ubicacion = geocodificar_direccion(calle_afectada)
+        if not ubicacion:
+            return False, 'No se pudo encontrar la ubicación exacta de la dirección proporcionada'
+
+        # Crear conexión a la base de datos
+        conexion = ControlConexion()
+        conexion.abrirBd(serv, usua, passw, bdat, port)
+
+        # Insertar el reporte en la base de datos
+        sql = """
+            INSERT INTO reportes_ambientales 
+            (tipo_evento, severidad, descripcion, fecha_reporte, calle_afectada, usuario_reporta, ubicacion)
+            VALUES (%s, %s, %s, %s, %s, %s, ST_GeomFromText(%s, 4326))
+        """
+        fecha_reporte = datetime.now()
+        tipo_evento = "Contaminación"
+        parametros = (tipo_evento, severidad, descripcion, fecha_reporte, calle_afectada, usuario_reporta, ubicacion)
+        
+        if conexion.ejecutarComandoSql(sql, parametros):
+            return True, 'Reporte registrado exitosamente'
+        else:
+            return False, 'Error al registrar el reporte'
+
+    except Exception as e:
+        return False, f'Error: {str(e)}'
+    finally:
+        if 'conexion' in locals():
+            conexion.cerrarBd()
+
 @vistareportarcontamincacion.route('/reportar_contaminacion', methods=['GET', 'POST'])
 @login_required
 def vista_reportarcontamincacion():
-
     if request.method == 'POST':
         try:
             # Obtener datos del formulario
             calle_afectada = request.form['calle_afectada']
-            severidad = int(request.form['severidad'])  # Convertir a entero
+            severidad = int(request.form['severidad'])
             descripcion = request.form['descripcion']
-            fecha_reporte = datetime.now()
-            tipo_evento = "Contaminación"  # Valor por defecto
-            usuario_reporta = current_user.id  # Obtener el ID del usuario actual
+            usuario_reporta = current_user.id
 
-            # Geocodificar la dirección
-            ubicacion = geocodificar_direccion(calle_afectada)
-            if not ubicacion:
-                flash('No se pudo encontrar la ubicación exacta de la dirección proporcionada. Por favor, verifica la dirección e intenta nuevamente.', 'error')
-                return redirect(url_for('idvistareportarcontamincacion.vista_reportarcontamincacion'))
-
-            # Crear conexión a la base de datos
-            conexion = ControlConexion()
-            conexion.abrirBd(serv, usua, passw, bdat, port)
-
-            # Insertar el reporte en la base de datos
-            sql = """
-                INSERT INTO reportes_ambientales 
-                (tipo_evento, severidad, descripcion, fecha_reporte, calle_afectada, usuario_reporta, ubicacion)
-                VALUES (%s, %s, %s, %s, %s, %s, ST_GeomFromText(%s, 4326))
-            """
-            parametros = (tipo_evento, severidad, descripcion, fecha_reporte, calle_afectada, usuario_reporta, ubicacion)
+            # Registrar el reporte
+            exito, mensaje = registrar_reporte(calle_afectada, severidad, descripcion, usuario_reporta)
             
-            if conexion.ejecutarComandoSql(sql, parametros):
+            if exito:
                 flash('Reporte de contaminación registrado exitosamente', 'success')
-                return redirect(url_for('idvistareportarcontamincacion.vista_reportarcontamincacion'))
             else:
-                flash('Error al registrar el reporte de contaminación', 'error')
+                flash(mensaje, 'error')
+                
+            return redirect(url_for('idvistareportarcontamincacion.vista_reportarcontamincacion'))
 
         except Exception as e:
             flash(f'Error: {str(e)}', 'error')
-        finally:
-            if 'conexion' in locals():
-                conexion.cerrarBd()
-
 
     return render_template('reportar_contaminacion.html')

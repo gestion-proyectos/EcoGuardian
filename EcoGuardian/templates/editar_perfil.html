@@ -223,6 +223,7 @@
             <img src="{{ url_for('static', filename='img/ecoguardian.png')}}" class="EcoGuardian" />
         </div>
 
+<<<<<<< HEAD
         <!-- Mensajes flash aquí, justo debajo de las imágenes -->
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
@@ -232,6 +233,17 @@
               {% endfor %}
             </ul>
           {% endif %}
+=======
+        <!-- Mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         {% endwith %}
 
         <div class="frame-30">

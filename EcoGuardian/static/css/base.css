@@ -1,82 +1,85 @@
+.main-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
-  padding: 20px;
+  padding: 0;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100vw;
+  overflow: hidden;
   background-color: #4A7043;
   font-family: Arial, sans-serif;
 }
 
 .sidebar {
-  border-radius: 40px;
+  border-radius: 18px;
   display: flex;
   flex-direction: column;
-  gap: 57px;
+  gap: 18px;
   align-items: center;
-  justify-content: center;
-  margin-left: -60%;
-  top: 0%;
-  width: 470px;
-  height: auto;
-  position: absolute;
-  overflow: hidden;
-  z-index: 1000;
+  justify-content: flex-start;
+  width: 230px;
+  min-height: 350px;
+  background: rgba(255, 255, 255, 0.55); /* Transparencia */
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  padding: 18px 10px 18px 10px;
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 3000;
+  margin: 0;
 }
 
+.sidebar {
+  pointer-events: none;
+}
+.sidebar .fondo-logo,
+.sidebar .frame-252,
+.sidebar .frame-253,
+.sidebar .frame-254,
+.sidebar .frame-255 {
+  pointer-events: auto;
+}
+
+/* Botones del menú más angostos */
 .frame-252,
 .frame-253,
 .frame-254,
 .frame-255 {
-  border-radius: 40px;
+  border-radius: 12px;
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 10px;
   align-items: center;
-  margin-top: 165px;
-  margin-left: -50%;
-  justify-content: center;
-  width: 200px;
-  height: 40px;
+  justify-content: flex-start;
+  width: 140px;      /* Ajuste de ancho */
+  height: 36px;
+  margin: 0 0 10px 0;
   position: relative;
-  border-color: #000000;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  padding-left: 10px;
 }
 
-.frame-252 {
-  /* EcoEventos */
-  background: #0288D1;
-  margin-top: 85px;
-  margin-bottom: -40%;
-}
-
-.frame-253 {
-  /* Rutas */
-  background: #F5F5DC;
-  margin-bottom: -40%;
-}
-
-.frame-254 {
-  /* Reportes */
-  background: #D9534F;
-  margin-bottom: -40%;
-}
-
-.frame-255 {
-  /* Usuarios */
-  background: #2F4858;
-  padding: 17px 24px;
-}
+.frame-252 { background: #0288D1; }
+.frame-253 { background: #F5F5DC; }
+.frame-254 { background: #D9534F; }
+.frame-255 { background: #2F4858; }
 
 .ecoeventos,
 .rutas,
 .reportar,
 .nombre-usuario {
-  text-align: center;
+  text-align: left;
   font-family: "Inter-Regular", sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   position: relative;
+  color: #fff;
 }
 
 .ecoeventos,
@@ -90,21 +93,22 @@ body {
 }
 
 .fondo-logo {
-  border-radius: 40px;
-  padding: 0px 73px;
+  border-radius: 18px;
+  padding: 0px 0px;
   display: flex;
   flex-direction: column;
   gap: 0px;
   align-items: center;
   justify-content: flex-start;
-  width: 195px;
-  position: absolute;
-  left: 3px;
-  top: 15px;
-  box-shadow: 9px 9px 5.2px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   overflow: hidden;
   background-image: url('/static/img/fondo_logo.png');
   background-size: cover;
+  margin-bottom: 18px;
 }
 
 .eco-guardian {
@@ -117,17 +121,15 @@ body {
 }
 
 .icon {
-  width: 30px;
-  /* Aumenta el tamaño del ícono para hacerlo más visible */
-  height: 30px;
-  margin-left: 20px;
-  /* Ajusta la posición del ícono a la derecha */
+  width: 17.5px;
+  height: 17.5px;
+  margin-left: 0;
 }
 
 .mini-menu {
   position: absolute;
   top: 100px;
-  left: 25%;
+  left: 27%;
   background-color: #F5F5DC;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -163,45 +165,60 @@ body {
 
 .menu-ecoeventos {
   background-color: #0288D1;
+  background-color: rgba(1, 53, 82, 0.85); /* azul con transparencia */
   color: white;
-  margin-left: -6%;
+  margin-left: 75%;
   margin-top: -2%;
 }
 
 .menu-rutas {
   background-color: #F5F5DC;
+  background-color: rgba(96, 96, 86, 0.85); /* blanco con transparencia */
   color: white;
-  margin-left: -6%;
-  margin-top: 4%;
+  margin-left: 75%;
+  margin-top: 30%;
 }
 
 .menu-reportes {
   background-color: #D9534F;
+  background-color: rgba(217, 83, 79, 0.85); /* Rojo con transparencia */
   color: white;
-  margin-left: -6%;
-  margin-top: 8.5%;
+  margin-left: 75%;
+  margin-top: 55%;
 }
 
 .menu-usuarios {
   background-color: #2F4858;
+  background-color: rgba(18, 28, 35, 0.85); /* azul oscuro con transparencia */
   color: white;
-  margin-left: -6%;
-  margin-top: 13%;
+  margin-left: 75%;
+  margin-top: 80%;
 }
 
+/* Ajustes para el contenido principal si lo necesitas */
 .content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  height: 100vh;
   width: 100%;
-  height: 100%;
+  background: transparent;
+  margin: 0;
+  padding: 0;
 }
 
+
+/* El mapa ocupa toda la pantalla */
 #map {
-  width: 100%;
-  height: 90vh;
-  /* Usa porcentaje de la altura de la pantalla */
-  border-radius: 20px;
-  margin-top: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  /* z-index: 1; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  margin: 0;
+  box-shadow: none;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
@@ -236,14 +253,16 @@ overflow: hidden;
 z-index: 1000;
 }
 
+.cuadro-reporte,
 .cuadro-reporte-contaminacion {
-  background-color: #D9534F;
+  background-color: rgba(217, 83, 79, 0.85); /* Rojo con transparencia */
   color: rgb(255, 255, 255);
-  padding: 20px;
+  padding: 16px;
   border-radius: 10px;
-  max-width: 550px;
-  margin-left: 77.6%;
+  max-width: 340px;      /* Más pequeño */
+  margin-left: 79vw;     /* Ajusta según tu layout */
   font-size: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
   position: absolute;
   overflow: hidden;
   z-index: 1000;
@@ -326,4 +345,66 @@ z-index: 1000;
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
+}
+
+/* Estilos para reacciones y comentarios */
+.btn-like,
+.btn-dislike {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: transform 0.2s;
+}
+
+.btn-like:hover,
+.btn-dislike:hover {
+  transform: scale(1.2);
+}
+
+.btn-like.active {
+  color: #28a745;
+}
+
+.btn-dislike.active {
+  color: #dc3545;
+}
+
+.comentario {
+  width: 100%;
+  min-height: 60px;
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.btn-comentar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-comentar:hover {
+  background-color: #0056b3;
+}
+
+.comentarios-lista {
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.comentario-item {
+  background-color: #f8f9fa;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border-left: 3px solid #007bff;
 }

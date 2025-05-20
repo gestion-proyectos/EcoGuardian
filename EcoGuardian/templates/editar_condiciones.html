@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
 <head>
     <title>Editar Condiciones</title>
     <style>
@@ -15,6 +19,10 @@
             background-position: center;
             font-family: Arial, sans-serif;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .form-container {
             background: rgba(255, 255, 255, 0.9);
             padding: 2rem;
@@ -25,6 +33,10 @@
             max-width: 400px;
             margin: 20px;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .frame {
             display: flex;
             width: 463px;
@@ -39,6 +51,10 @@
             background-size: cover;
             background-position: 50% 50%;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .image {
             position: relative;
             width: 100%;
@@ -49,6 +65,10 @@
             object-fit: cover;
             border-radius: 15px;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .logo {
             margin-left: -450px;
             margin-top: -50px;
@@ -56,6 +76,10 @@
             width: 50px;
             height: 75px;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .EcoGuardian {
             position: relative;
             width: 120px;
@@ -66,6 +90,10 @@
             background-size: cover;
             background-position: 50% 50%;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .frame-30 {
             background: #ffffff;
             border-radius: 40px;
@@ -77,6 +105,10 @@
             margin-top: 10px;
             margin-left: -15px;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .menu-button {
             background: transparent;
             border: none;
@@ -89,31 +121,59 @@
             color: black;
             display: inline-block;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .menu-button.active {
             background-color: #d2d2d2;
             font-weight: bold;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .form-group {
             margin-bottom: 1.5rem;
             text-align: left;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .form-group label {
             display: block;
             margin-bottom: 0.7rem;
             font-size: 16px;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .checkbox-group {
             text-align: left;
             margin-left: 1.5rem;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .checkbox-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-size: 15px;
         }
+<<<<<<< HEAD
         .button-group {
             text-align: center;
         }
+=======
+
+        .button-group {
+            text-align: center;
+        }
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .button-group button {
             margin-top: 1rem;
             padding: 0.5rem 1.5rem;
@@ -124,11 +184,19 @@
             font-weight: bold;
             cursor: pointer;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .messages {
             list-style: none;
             padding: 0;
             margin: 1rem 0;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .success {
             color: #155724;
             background: #d4edda;
@@ -137,6 +205,10 @@
             border-radius: 5px;
             margin-bottom: 0.5rem;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         .error {
             color: #721c24;
             background: #f8d7da;
@@ -145,6 +217,7 @@
             border-radius: 5px;
             margin-bottom: 0.5rem;
         }
+<<<<<<< HEAD
         .button-group .btn-home {
     display: inline-block;
     margin-left: 1rem;
@@ -170,6 +243,37 @@
 }
     </style>
 </head>
+=======
+
+        .button-group .btn-home {
+            display: inline-block;
+            margin-left: 1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            background: #aaa;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        .button-group .btn-home:hover {
+            background: #333;
+        }
+
+        .button-group button,
+        .button-group .btn-home {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
 <body>
     <div class="form-container">
         <div class="frame">
@@ -177,6 +281,7 @@
             <img src="{{ url_for('static', filename='img/logo.png')}}" class="logo" />
             <img src="{{ url_for('static', filename='img/ecoguardian.png')}}" class="EcoGuardian" />
         </div>
+<<<<<<< HEAD
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             <ul class="messages">
@@ -190,14 +295,42 @@
             <a href="{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}" class="menu-button {% if active_tab == 'datos' %}active{% endif %}">Datos personales</a>
             <a href="{{ url_for('idvistaeditarcondiciones.editar_condiciones') }}" class="menu-button {% if active_tab == 'condiciones' %}active{% endif %}">Condiciones de salud</a>
             <a href="{{ url_for('idvistaeditarestilo.editar_estilo') }}" class="menu-button {% if active_tab == 'estilo' %}active{% endif %}">Estilo de vida activo</a>
+=======
+        <!-- Mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="messages">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <div class="frame-30">
+            <a href="{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}"
+                class="menu-button {% if active_tab == 'datos' %}active{% endif %}">Datos personales</a>
+            <a href="{{ url_for('idvistaeditarcondiciones.editar_condiciones') }}"
+                class="menu-button {% if active_tab == 'condiciones' %}active{% endif %}">Condiciones de salud</a>
+            <a href="{{ url_for('idvistaeditarestilo.editar_estilo') }}"
+                class="menu-button {% if active_tab == 'estilo' %}active{% endif %}">Estilo de vida activo</a>
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
         </div>
         <form method="POST">
             <div class="form-group">
                 <label></label>
                 <div class="checkbox-group">
+<<<<<<< HEAD
                     <label><input type="checkbox" name="perfil_salud" value="asmático" {% if 'asmático' in datos.perfil_salud %}checked{% endif %}> Asmático</label>
                     <label><input type="checkbox" name="perfil_salud" value="Alergico al polen" {% if 'Alergico al polen' in datos.perfil_salud %}checked{% endif %}> Alérgico al polen</label>
                     <label><input type="checkbox" name="perfil_salud" value="deportista" {% if 'deportista' in datos.perfil_salud %}checked{% endif %}> Deportista</label>
+=======
+                    <label><input type="checkbox" name="perfil_salud" value="asmático" {% if 'asmático' in
+                            datos.perfil_salud %}checked{% endif %}> Asmático</label>
+                    <label><input type="checkbox" name="perfil_salud" value="Alergico al polen" {%
+                            if 'Alergico al polen' in datos.perfil_salud %}checked{% endif %}> Alérgico al polen</label>
+                    <label><input type="checkbox" name="perfil_salud" value="deportista" {% if 'deportista' in
+                            datos.perfil_salud %}checked{% endif %}> Deportista</label>
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
                 </div>
             </div>
             <div class="button-group">
@@ -207,4 +340,8 @@
         </form>
     </div>
 </body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
 </html>

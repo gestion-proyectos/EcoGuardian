@@ -10,7 +10,6 @@ import markupsafe, requests
 vistaeditarperfil = Blueprint('idvistaeditarperfil', __name__, template_folder='templates')
  
 @vistaeditarperfil.route('/editar_perfil', methods=['GET', 'POST'])
-#@vistaprueba.route('/Desktop4', methods=['GET', 'POST'])
 
 def vista_editar_perfil():
     from control.ControlConexion import ControlConexion

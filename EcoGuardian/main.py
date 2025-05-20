@@ -10,9 +10,14 @@ from vista.vistalogin import vistalogin
 from vista.vistaregistro import vistaregistro
 from vista.vista_registro1 import vistaregistro1
 from vista.vistahome import vistahome
+<<<<<<< HEAD
 
 """rutas"""
 from vista.vistarutas import vistarutas
+=======
+from vista.api_reaccion import api
+
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
 """editarperfil"""
 from vista.vistaeditarperfil import vistaeditarperfil
 from vista.vistaeditarcondiciones import vistaeditarcondiciones
@@ -56,6 +61,10 @@ app.register_blueprint(vistaverincenidos)
 app.register_blueprint(vistaverpolen)
 app.register_blueprint(vistaeditarcondiciones)
 app.register_blueprint(vistaeditarestilo)
+<<<<<<< HEAD
+=======
+app.register_blueprint(api)
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
 
 app.register_blueprint(vistaverrutasguardadas)
 app.register_blueprint(vistainiciarruta)

@@ -20,8 +20,16 @@ bdat="db_prueba"
 bdat="db_sistema_gestion"
 port=5432 """
 
+<<<<<<< HEAD
 serv = "localhost"
 usua = "postgres"
 passw = "2915790sol"
 bdat = "bdecoguardian"
 port = 5433
+=======
+""" serv = "localhost"
+usua = "postgres"
+passw = "2915790sol"
+bdat = "bdecoguardian"
+port = 5433 """
+>>>>>>> 492c9721892577835ce0f4ca9125d35c649b57eb
