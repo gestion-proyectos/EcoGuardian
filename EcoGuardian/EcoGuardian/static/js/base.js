@@ -78,7 +78,7 @@ function showMiniMenu(type) {
 
   } else if (type === 'rutas') {
     items = [
-      { label: 'Iniciar', link: '/rutas' },
+      { label: 'Inciar', link: '/ver_rutas_guardadas' },
       /*         { label: 'Iniciar ruta guardada', link: '/iniciar_ruta' },
               { label: 'Añadir ruta', link: '/añadir_ruta' } */
     ];
@@ -96,9 +96,9 @@ function showMiniMenu(type) {
 
   } else if (type === 'usuarios') {
     items = [
-      { label: 'Iniciar sesión', link: '/login' },
-      { label: 'Editar perfil', link: editarPerfilUrl },
-      { label: 'Cerrar sesión', link: logoutUrl }
+      { label: 'iniciarsesion(breve)', link: '/login' },
+      { label: 'Editar perfil', link: "{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}" },
+      { label: 'Cerrar sesión', link: "{{ url_for('home.logout') }}" }
     ];
     menu.classList.add('menu-usuarios');
   }
