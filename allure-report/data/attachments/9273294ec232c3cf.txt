@@ -1,0 +1,2 @@
+Error en geocodificación: 
+Dirección que causó el error: Bogotá, Colombia

@@ -3,7 +3,7 @@ from psycopg2 import extras
 import psycopg2
 
 class ControlConexion:
-    def _init_(self):
+    def __init__(self):
         self.conn = None
         self.cursor = None
 

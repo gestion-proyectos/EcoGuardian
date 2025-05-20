@@ -1,0 +1,10 @@
+Datos de sesión: Usuario Test test_1747669369_9887@test.com test123
+Condiciones: ['Problemas respiratorios']
+Estilo de vida: ['Deportista al aire libre']
+[DEBUG] Intento de login - Usuario: test_1747669369_9887@test.com
+[DEBUG] Login exitoso - Usuario: test_1747669369_9887@test.com
+Número total de polen en la base de datos: 4
+Reporte procesado - ID: 102, Lat: 6.2979489, Lon: -75.5800852
+Reporte procesado - ID: 103, Lat: 6.2984553, Lon: -75.5806574
+Reporte procesado - ID: 106, Lat: 4.6531094, Lon: -74.0530972
+Reporte procesado - ID: 109, Lat: 4.7141771, Lon: -74.1295882

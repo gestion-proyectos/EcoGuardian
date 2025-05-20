@@ -1,9 +1,6 @@
-from pprint import pprint
-import requests
-from flask import Blueprint, render_template, request, session, flash, redirect, url_for
+from flask import Blueprint, render_template, request, session, flash, redirect, url_for, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from configBd import *
-import markupsafe
 from control.ControlConexion import ControlConexion
 
 # Crear un Blueprint
@@ -17,6 +14,17 @@ class User(UserMixin):
     def __init__(self, id, username):
         self.id = id
         self.correo = username
+
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    if request.is_json or request.path.startswith('/api/'):
+        return jsonify({
+            'status': 'error',
+            'message': 'Usuario no autenticado',
+            'redirect': url_for('idvistalogin.vista_login')
+        }), 401
+    else:
+        return redirect(url_for('idvistalogin.vista_login'))        
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -46,7 +54,7 @@ def vista_login():
         #usuario = request.form.get('username')
         correo = request.form.get('username')
         contrasena = request.form.get('password')
-        
+        #session['username'] = usuario  # o el campo correcto
         # Debug prints
         #print(f"[DEBUG] Intento de login - Usuario: {usuario}")
         print(f"[DEBUG] Intento de login - Usuario: {correo}")

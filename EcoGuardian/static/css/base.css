@@ -1,4 +1,11 @@
- body {
+.main-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+body {
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -7,7 +14,8 @@
   background-color: #4A7043;
   font-family: Arial, sans-serif;
 }
- .sidebar {
+
+.sidebar {
   border-radius: 18px;
   display: flex;
   flex-direction: column;
@@ -73,7 +81,7 @@
   color: #354E24;
 }
 
- .fondo-logo {
+.fondo-logo {
   border-radius: 18px;
   padding: 0px 0px;
   display: flex;
@@ -102,8 +110,8 @@
 }
 
 .icon {
-  width: 26px;
-  height: 26px;
+  width: 17.5px;
+  height: 17.5px;
   margin-left: 0;
 }
 
@@ -178,13 +186,14 @@
 
 /* Ajustes para el contenido principal si lo necesitas */
 .content {
-  width: 100vw;
+  flex: 1;
+  position: relative;
+  z-index: 1;
   height: 100vh;
+  width: 100%;
+  background: transparent;
   margin: 0;
   padding: 0;
-  position: relative;
-  z-index: 10;
-  background: transparent;
 }
 
 
@@ -325,4 +334,66 @@ z-index: 1000;
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
+}
+
+/* Estilos para reacciones y comentarios */
+.btn-like,
+.btn-dislike {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: transform 0.2s;
+}
+
+.btn-like:hover,
+.btn-dislike:hover {
+  transform: scale(1.2);
+}
+
+.btn-like.active {
+  color: #28a745;
+}
+
+.btn-dislike.active {
+  color: #dc3545;
+}
+
+.comentario {
+  width: 100%;
+  min-height: 60px;
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.btn-comentar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-comentar:hover {
+  background-color: #0056b3;
+}
+
+.comentarios-lista {
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.comentario-item {
+  background-color: #f8f9fa;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border-left: 3px solid #007bff;
 }

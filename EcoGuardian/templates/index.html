@@ -15,41 +15,41 @@
 </head>
 
 <body>
-
-  <div class="sidebar">
-
-    <div class="fondo-logo">
-      <img src="{{ url_for('static', filename='img/logo.png')}}" class="eco-guardian" style="height: 35px; width: 30px;"/>
-      <div class="eco-guardian">EcoGuardian</div>
-    </div>
-    <!-- <div onclick="showMiniMenu('eventos')" class="frame-252 trigger-btn" style="cursor: pointer;"> -->
-    <div onclick="checkSession('eventos')" class="frame-252 trigger-btn" style="cursor: pointer;">
-      <img src="{{ url_for('static', filename='img/ecoeventos.png')}}" class="icon">
-      <div class="ecoeventos">EcoEventos</div>
-    </div>
-    <!-- <div onclick="showMiniMenu('rutas')" class="frame-253 trigger-btn" style="cursor: pointer;"> -->
-    <div onclick="checkSession('rutas')" class="frame-253 trigger-btn" style="cursor: pointer;">
-      <img src="{{ url_for('static', filename='img/rutas.png')}}" class="icon">
-      <div class="rutas">Rutas</div>
-    </div>
-    <!-- <div onclick="showMiniMenu('reportes')" class="frame-254 trigger-btn" style="cursor: pointer;"> -->
-    <div onclick="checkSession('reportes')" class="frame-254 trigger-btn" style="cursor: pointer;">
-      <img src="{{ url_for('static', filename='img/reporte.png')}}" class="icon">
-      <div class="reportar">Reportar</div>
-    </div>
-    <!-- <div onclick="showMiniMenu('usuarios')" class="frame-255 trigger-btn" style="cursor: pointer;"> -->
-    <div onclick="checkSession('usuarios')" class="frame-255 trigger-btn" style="cursor: pointer;">
-      <img src="{{ url_for('static', filename='img/usuario.png')}}" class="icon">
-      <div class="nombre-usuario">Usuario</div>
-    </div>
-
-  </div>
+  <div id="map"></div>
+  <div class="main-layout">
+    <div class="sidebar">
+      <div class="fondo-logo">
+        <img src="{{ url_for('static', filename='img/logo.png')}}" class="eco-guardian"
+          style="height: 25px; width: 25px;" />
+        <div class="eco-guardian">EcoGuardian</div>
+      </div>
+      <!-- <div onclick="showMiniMenu('eventos')" class="frame-252 trigger-btn" style="cursor: pointer;"> -->
+      <div onclick="checkSession('eventos')" class="frame-252 trigger-btn" style="cursor: pointer;">
+        <img src="{{ url_for('static', filename='img/ecoeventos.png')}}" class="icon">
+        <div class="ecoeventos">EcoEventos</div>
+      </div>
+      <!-- <div onclick="showMiniMenu('rutas')" class="frame-253 trigger-btn" style="cursor: pointer;"> -->
+      <div onclick="checkSession('rutas')" class="frame-253 trigger-btn" style="cursor: pointer;">
+        <img src="{{ url_for('static', filename='img/rutas.png')}}" class="icon">
+        <div class="rutas">Rutas</div>
+      </div>
+      <!-- <div onclick="showMiniMenu('reportes')" class="frame-254 trigger-btn" style="cursor: pointer;"> -->
+      <div onclick="checkSession('reportes')" class="frame-254 trigger-btn" style="cursor: pointer;">
+        <img src="{{ url_for('static', filename='img/reporte.png')}}" class="icon">
+        <div class="reportar">Reportar</div>
+      </div>
+      <!-- <div onclick="showMiniMenu('usuarios')" class="frame-255 trigger-btn" style="cursor: pointer;"> -->
+      <div onclick="checkSession('usuarios')" class="frame-255 trigger-btn" style="cursor: pointer;">
+        <img src="{{ url_for('static', filename='img/usuario.png')}}" class="icon">
+        <div class="nombre-usuario">{% if session.get('username') %}{{ session.get('username') }}{% else %}Usuario{% endif %}</div>
+      </div>
 
   <div id="miniMenu" class="mini-menu hidden">
     <ul id="miniMenuContent"></ul>
   </div>
 
   <div class="content">
+    <!-- Formularios, overlays, etc -->
     {% block content %}
     <!-- El contenido de la página se inyectará aquí -->
     {% endblock %}
@@ -58,10 +58,5 @@
 
 <!-- Base JS -->
 <script src="{{ url_for('static', filename='js/base.js') }}"></script>
-
-<script>
-  const logoutUrl = "{{ url_for('idvistalogin.logout') }}";
-  const editarPerfilUrl = "{{ url_for('idvistaeditarperfil.vista_editar_perfil') }}";
-</script>
 
 </html>

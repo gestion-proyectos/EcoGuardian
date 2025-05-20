@@ -4,8 +4,8 @@
 
 {% block content %}
 
-<h1 style="margin-left: 500px; color: rgb(255, 255, 255); font-size: 15px;">Reportar
-    Incendios</h1>
+<!-- <h1 style="margin-left: 500px; color: rgb(255, 255, 255); font-size: 15px;">Reportar
+    Incendios</h1> -->
 
 <div class="cuadro-reporte">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -45,15 +45,6 @@
 
 </div>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-<div class="flash-messages">
-    {% for category, message in messages %}
-    <div class="flash flash-{{ category }}">{{ message }}</div>
-    {% endfor %}
-</div>
-{% endif %}
-{% endwith %}
 
 <div id="map"></div>
 

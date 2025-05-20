@@ -10,6 +10,7 @@ from vista.vistalogin import vistalogin
 from vista.vistaregistro import vistaregistro
 from vista.vista_registro1 import vistaregistro1
 from vista.vistahome import vistahome
+from vista.api_reaccion import api
 
 """editarperfil"""
 from vista.vistaeditarperfil import vistaeditarperfil
@@ -54,6 +55,7 @@ app.register_blueprint(vistaverincenidos)
 app.register_blueprint(vistaverpolen)
 app.register_blueprint(vistaeditarcondiciones)
 app.register_blueprint(vistaeditarestilo)
+app.register_blueprint(api)
 
 app.register_blueprint(vistaverrutasguardadas)
 app.register_blueprint(vistainiciarruta)
