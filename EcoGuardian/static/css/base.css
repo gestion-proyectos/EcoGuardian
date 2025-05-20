@@ -253,6 +253,7 @@ padding: 20px;
 border-radius: 10px;
 max-width: 550px;
 margin-left: 79.7%;
+margin-top: -100%;
 font-size: 13px;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 position: absolute;
@@ -268,6 +269,7 @@ z-index: 1000;
   border-radius: 10px;
   max-width: 340px;      /* Más pequeño */
   margin-left: 79vw;     /* Ajusta según tu layout */
+  margin-top: -150%;
   font-size: 13px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
   position: absolute;

@@ -17,7 +17,7 @@ from vista.vistaeditarperfil import vistaeditarperfil
 from vista.vistaeditarcondiciones import vistaeditarcondiciones
 from vista.vistaeditarestilo import vistaeditarestilo
 
-from vista.vistaprueba import vistaprueba
+
 
 """EcoEventos"""
 from vista.vistavercontaminacion import vistavercontaminacion
@@ -25,9 +25,6 @@ from vista.vistaverincendios import vistaverincenidos
 from vista.vistaverpolen import vistaverpolen
 
 """Rutas"""
-from vista.vistaverrutasguardadas import vistaverrutasguardadas
-from vista.vistainiciarruta import vistainiciarruta
-from vista.vistaañadirruta import vistaañadirruta
 from vista.vistarutas import vistarutas
 
 """Reportar"""
@@ -45,24 +42,30 @@ login_manager.init_app(app)
 
 # Registrar los blueprints
 app.register_blueprint(menu)  # Este debe ser el primero para que la ruta raíz muestre el menú
+app.register_blueprint(vistahome)
 app.register_blueprint(vistalogin)
+
+"""Registro"""
 app.register_blueprint(vistaregistro)
 app.register_blueprint(vistaregistro1)
-app.register_blueprint(vistahome)
-app.register_blueprint(vistaprueba)
-app.register_blueprint(vistaeditarperfil)
+
+"""EcoEventos"""
 app.register_blueprint(vistavercontaminacion)
 app.register_blueprint(vistaverincenidos)
 app.register_blueprint(vistaverpolen)
+
+"""Editar perfil"""
+app.register_blueprint(vistaeditarperfil)
 app.register_blueprint(vistaeditarcondiciones)
 app.register_blueprint(vistaeditarestilo)
+
+"""Api"""
 app.register_blueprint(api)
 
-app.register_blueprint(vistaverrutasguardadas)
-app.register_blueprint(vistainiciarruta)
-app.register_blueprint(vistaañadirruta)
+"""Rutas"""
 app.register_blueprint(vistarutas)
 
+"""Reportar"""
 app.register_blueprint(vistareportarincendio)
 app.register_blueprint(vistareportarcontamincacion)
 app.register_blueprint(vistareportarpolen)
