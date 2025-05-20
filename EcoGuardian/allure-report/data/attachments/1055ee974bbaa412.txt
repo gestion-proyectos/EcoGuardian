@@ -1,0 +1,23 @@
+Datos de sesión: Usuario Test test_1747770668_8916@test.com test123
+Condiciones: ['Problemas respiratorios']
+Estilo de vida: ['Deportista al aire libre']
+[DEBUG] Intento de login - Usuario: test_1747770668_8916@test.com
+[DEBUG] Login exitoso - Usuario: test_1747770668_8916@test.com
+Número total contaminacion en la base de datos: 17
+Reporte procesado - ID: 7, Lat: 6.2984553, Lon: -75.5806574
+Reporte procesado - ID: 126, Lat: 4.7141771, Lon: -74.1295882
+Reporte procesado - ID: 129, Lat: 4.6531094, Lon: -74.0530972
+Reporte procesado - ID: 132, Lat: 4.6528733, Lon: -74.0524235
+Reporte procesado - ID: 135, Lat: 4.7141771, Lon: -74.1295882
+Reporte procesado - ID: 138, Lat: 4.7141771, Lon: -74.1295882
+Reporte procesado - ID: 141, Lat: 4.7141771, Lon: -74.1295882
+Reporte procesado - ID: 144, Lat: 4.6531094, Lon: -74.0530972
+Reporte procesado - ID: 147, Lat: 4.6531094, Lon: -74.0530972
+Reporte procesado - ID: 150, Lat: 4.7141771, Lon: -74.1295882
+Reporte procesado - ID: 153, Lat: 4.6531094, Lon: -74.0530972
+Reporte procesado - ID: 156, Lat: 4.7141771, Lon: -74.1295882
+Reporte procesado - ID: 159, Lat: 4.7141771, Lon: -74.1295882
+Reporte procesado - ID: 162, Lat: 4.7141771, Lon: -74.1295882
+Reporte procesado - ID: 165, Lat: 4.6531094, Lon: -74.0530972
+Reporte procesado - ID: 168, Lat: 4.6531094, Lon: -74.0530972
+Reporte procesado - ID: 171, Lat: 4.6531094, Lon: -74.0530972

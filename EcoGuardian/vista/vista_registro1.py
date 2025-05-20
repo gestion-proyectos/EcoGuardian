@@ -1,11 +1,6 @@
-from pprint import pprint
-import requests
-#from flask_login import login_required login_user, current_user
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 from configBd import *
-import markupsafe, requests
-from control.ControlConexion import ControlConexion
-#import markupsafe, requests, bcrypt
+from control.ControlConexion import *
 
 # Crear un Blueprint
 vistaregistro1 = Blueprint('idvistaregistro1', __name__, template_folder='templates')

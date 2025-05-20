@@ -1,1 +1,0 @@
-Error en la respuesta de Nominatim: 500

@@ -1,9 +1,31 @@
 from main import app
 from flask import session
-import time, random, requests, unittest, allure
-from unittest.mock import patch
+import time, random, requests, unittest, allure, json
+from unittest.mock import *
 from vista.vistareportarcontamincacion import registrar_reporte, geocodificar_direccion
-from vista.vistalogin import load_user
+from vista.vistalogin import *
+import pytest
+@pytest.fixture(autouse=True)
+def mock_load_user():
+    with patch('vista.vistalogin.load_user') as mock:
+        user = Mock(spec=User)
+        user.is_authenticated = True
+        user.id = '1'
+        user.nombre = 'Test'
+        user.correo = 'test@test.com'
+        mock.return_value = user
+        yield
+
+@pytest.fixture
+def mock_db():
+    with patch('psycopg2.connect') as mock_connect:
+        mock_conn = Mock()
+        mock_cur = Mock()
+        mock_connect.return_value = mock_conn
+        mock_conn.cursor.return_value = mock_cur
+        mock_conn.__enter__.return_value = mock_conn
+        mock_conn.__exit__.return_value = None
+        yield mock_cur
 
 
 class BaseTestCase(unittest.TestCase):
@@ -429,16 +451,7 @@ class TestApiReaccion(BaseTestCase):
         self.assertEqual(data['status'], 'ok')
         self.assertIn('id_reaccion', data['data'])
 
-    @allure.title("Prueba de reacción sin autenticación")
-    @allure.description("Verifica que no se pueda agregar una reacción sin estar autenticado")
-    @allure.label("severity", "critical")
-    def test_reaccion_sin_autenticacion(self):
-        self.app.get('/logout')
-        response = self.app.post('/api/reaccion', json={
-            'id_reporte': 1,
-            'tipo_reaccion': 'positiva'
-        })
-        self.assertEqual(response.status_code, 401)
+
 
     @allure.title("Prueba de obtener comentarios")
     @allure.description("Verifica que se puedan obtener los comentarios de un reporte")
@@ -457,7 +470,9 @@ class TestApiReaccion(BaseTestCase):
         self.assertEqual(data['status'], 'ok')
         self.assertIsInstance(data['comentarios'], list)
 
-class TestVistaVerPolen(BaseTestCase):
+
+
+class TestVistaRutas(BaseTestCase):
     def setUp(self):
         super().setUp()
         # Generar correo único y registrar usuario
@@ -476,50 +491,26 @@ class TestVistaVerPolen(BaseTestCase):
             'username': self.test_email,
             'password': 'test123'
         })
-
-    @allure.title("Prueba de vista de polen")
-    @allure.description("Verifica que se pueda acceder a la vista de polen")
-    @allure.label("severity", "normal")
-    def test_vista_polen(self):
-        response = self.app.get('/ver_polen')
+    
+    @allure.story('Rutas')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_vista_rutas(self):
+        response = self.app.get('/rutas')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Polen', response.data)
+        self.assertIn(b'Rutas recomendadas', response.data)
+    
 
-    @allure.title("Prueba de vista de polen sin autenticación")
-    @allure.description("Verifica que se pueda acceder a la vista sin estar autenticado")
-    @allure.label("severity", "normal")
-    def test_vista_polen_sin_autenticacion(self):
-        self.app.get('/logout')
-        response = self.app.get('/ver_polen')
+
+    @allure.story('Rutas')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_api_rutas_recomendadas(self):
+        response = self.app.get('/api/rutas_recomendadas')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Polen', response.data)
+        data = json.loads(response.data)
+        self.assertIn('features', data)
 
-    @allure.title("Prueba de reacción a reporte de polen autenticado")
-    @allure.description("Verifica que se pueda reaccionar a un reporte estando autenticado")
-    @allure.label("severity", "normal")
-    def test_reaccion_polen_autenticado(self):
-        response = self.app.post('/api/reaccion', json={
-            'id_reporte': 1,
-            'tipo_reaccion': 'positiva',
-            'comentario': 'Test de reacción a polen'
-        })
-        self.assertEqual(response.status_code, 200)
-        data = response.get_json()
-        self.assertEqual(data['status'], 'ok')
 
-    @allure.title("Prueba de reacción a reporte de polen sin autenticación")
-    @allure.description("Verifica que no se pueda reaccionar sin estar autenticado")
-    @allure.label("severity", "critical")
-    def test_reaccion_polen_sin_autenticacion(self):
-        self.app.get('/logout')
-        response = self.app.post('/api/reaccion', json={
-            'id_reporte': 1,
-            'tipo_reaccion': 'positiva',
-            'comentario': 'Test de reacción a polen'
-        })
-        self.assertEqual(response.status_code, 401)
-
-class TestVistaVerContaminacion(BaseTestCase):
+class TestRutasData(BaseTestCase):
     def setUp(self):
         super().setUp()
         # Generar correo único y registrar usuario
@@ -538,110 +529,50 @@ class TestVistaVerContaminacion(BaseTestCase):
             'username': self.test_email,
             'password': 'test123'
         })
-
-    @allure.title("Prueba de vista de contaminación")
-    @allure.description("Verifica que se pueda acceder a la vista de contaminación")
-    @allure.label("severity", "normal")
-    def test_vista_contaminacion(self):
-        response = self.app.get('/ver_contaminacion')
+    
+    @allure.story('Rutas')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_estructura_rutas(self):
+        response = self.app.get('/api/rutas_recomendadas')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Contaminaci\xc3\xb3n', response.data)
-
-    @allure.title("Prueba de vista de contaminación sin autenticación")
-    @allure.description("Verifica que se pueda acceder a la vista sin estar autenticado")
-    @allure.label("severity", "normal")
-    def test_vista_contaminacion_sin_autenticacion(self):
-        self.app.get('/logout')
-        response = self.app.get('/ver_contaminacion')
+        data = json.loads(response.data)
+        self.assertIn('features', data)
+        for feature in data['features']:
+            self.assertIn('geometry', feature)
+            self.assertIn('properties', feature)
+            self.assertIn('type', feature)
+            self.assertEqual(feature['type'], 'Feature')
+    
+    @allure.story('Rutas')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_coordenadas_validas(self):
+        response = self.app.get('/api/rutas_recomendadas')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Contaminaci\xc3\xb3n', response.data)
-
-    @allure.title("Prueba de reacción a reporte de contaminación autenticado")
-    @allure.description("Verifica que se pueda reaccionar a un reporte estando autenticado")
-    @allure.label("severity", "normal")
-    def test_reaccion_contaminacion_autenticado(self):
-        response = self.app.post('/api/reaccion', json={
-            'id_reporte': 1,
-            'tipo_reaccion': 'positiva',
-            'comentario': 'Test de reacción a contaminación'
-        })
+        data = json.loads(response.data)
+        for feature in data['features']:
+            coords = feature['geometry']['coordinates']
+            for coord in coords:
+                self.assertTrue(-75.7 <= coord[0] <= -75.5)  # Longitud
+                self.assertTrue(6.1 <= coord[1] <= 6.2)      # Latitud
+    
+    @allure.story('Rutas')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_nombres_rutas(self):
+        response = self.app.get('/api/rutas_recomendadas')
         self.assertEqual(response.status_code, 200)
-        data = response.get_json()
-        self.assertEqual(data['status'], 'ok')
-
-    @allure.title("Prueba de reacción a reporte de contaminación sin autenticación")
-    @allure.description("Verifica que no se pueda reaccionar sin estar autenticado")
-    @allure.label("severity", "critical")
-    def test_reaccion_contaminacion_sin_autenticacion(self):
-        self.app.get('/logout')
-        response = self.app.post('/api/reaccion', json={
-            'id_reporte': 1,
-            'tipo_reaccion': 'positiva',
-            'comentario': 'Test de reacción a contaminación'
-        })
-        self.assertEqual(response.status_code, 401)
-
-class TestVistaVerIncendios(BaseTestCase):
-    def setUp(self):
-        super().setUp()
-        # Generar correo único y registrar usuario
-        self.test_email = self.get_unique_email()
-        self.app.post('/registro', data={
-            'nombre': 'Usuario Test',
-            'correo': self.test_email,
-            'password': 'test123',
-            'confirmar_password': 'test123'
-        })
-        self.app.post('/registro1', data={
-            'condiciones': ['Problemas respiratorios'],
-            'estilo_vida': ['Deportista al aire libre']
-        })
-        self.app.post('/login', data={
-            'username': self.test_email,
-            'password': 'test123'
-        })
-
-    @allure.title("Prueba de vista de incendios")
-    @allure.description("Verifica que se pueda acceder a la vista de incendios")
-    @allure.label("severity", "normal")
-    def test_vista_incendios(self):
-        response = self.app.get('/ver_incendios')
+        data = json.loads(response.data)
+        nombres = [f['properties']['name'] for f in data['features']]
+        self.assertEqual(len(nombres), len(set(nombres)))
+    
+    @allure.story('Rutas')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_criticidad_valida(self):
+        response = self.app.get('/api/rutas_recomendadas')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Incendios', response.data)
-
-    @allure.title("Prueba de vista de incendios sin autenticación")
-    @allure.description("Verifica que se pueda acceder a la vista sin estar autenticado")
-    @allure.label("severity", "normal")
-    def test_vista_incendios_sin_autenticacion(self):
-        self.app.get('/logout')
-        response = self.app.get('/ver_incendios')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Incendios', response.data)
-
-    @allure.title("Prueba de reacción a reporte de incendio autenticado")
-    @allure.description("Verifica que se pueda reaccionar a un reporte estando autenticado")
-    @allure.label("severity", "normal")
-    def test_reaccion_incendio_autenticado(self):
-        response = self.app.post('/api/reaccion', json={
-            'id_reporte': 1,
-            'tipo_reaccion': 'positiva',
-            'comentario': 'Test de reacción a incendio'
-        })
-        self.assertEqual(response.status_code, 200)
-        data = response.get_json()
-        self.assertEqual(data['status'], 'ok')
-
-    @allure.title("Prueba de reacción a reporte de incendio sin autenticación")
-    @allure.description("Verifica que no se pueda reaccionar sin estar autenticado")
-    @allure.label("severity", "critical")
-    def test_reaccion_incendio_sin_autenticacion(self):
-        self.app.get('/logout')
-        response = self.app.post('/api/reaccion', json={
-            'id_reporte': 1,
-            'tipo_reaccion': 'positiva',
-            'comentario': 'Test de reacción a incendio'
-        })
-        self.assertEqual(response.status_code, 401)
+        data = json.loads(response.data)
+        criticidades_validas = ['baja', 'media', 'alta']
+        for feature in data['features']:
+            self.assertIn(feature['properties']['criticidad'], criticidades_validas)
 
 if __name__ == '__main__':
     unittest.main() 

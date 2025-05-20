@@ -1,10 +1,5 @@
-from pprint import pprint
-import requests
-#from flask_login import login_required login_user, current_user
-from flask import Blueprint, render_template, request, session, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash
 from configBd import *
-import markupsafe, requests
-#import markupsafe, requests, bcrypt
 
 # Crear un Blueprint
 vistaeditarperfil = Blueprint('idvistaeditarperfil', __name__, template_folder='templates')

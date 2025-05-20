@@ -1,9 +1,11 @@
 # main.py
-from flask import Flask, render_template, redirect, session, flash, send_file, request, url_for
-import os, io, xlsxwriter, requests
+from flask import Flask, redirect, jsonify, request, url_for
+from flask import jsonify, request, redirect, url_for
+import os
 from datetime import timedelta
 from configBd import *
-from vista.vistalogin import login_manager
+from vista.vistalogin import login_manager, load_user
+from flask_login import LoginManager
 
 from menu import menu
 from vista.vistalogin import vistalogin
@@ -16,8 +18,6 @@ from vista.api_reaccion import api
 from vista.vistaeditarperfil import vistaeditarperfil
 from vista.vistaeditarcondiciones import vistaeditarcondiciones
 from vista.vistaeditarestilo import vistaeditarestilo
-
-
 
 """EcoEventos"""
 from vista.vistavercontaminacion import vistavercontaminacion
@@ -34,11 +34,12 @@ from vista.vistareportarpolen import vistareportarpolen
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-#app.secret_key = 'b14ca5898a4e4133bbce2ea2315a1916'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=10)
 
-# Inicializar LoginManager
+# Configurar login_manager
 login_manager.init_app(app)
+login_manager.login_view = 'idvistalogin.vista_login'
+login_manager.user_loader(load_user)
 
 # Registrar los blueprints
 app.register_blueprint(menu)  # Este debe ser el primero para que la ruta raíz muestre el menú
@@ -62,6 +63,14 @@ app.register_blueprint(vistaeditarestilo)
 """Api"""
 app.register_blueprint(api)
 
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    # Si la ruta es de la API, devuelve JSON y 401
+    if request.path.startswith('/api/'):
+        return jsonify({'status': 'error', 'message': 'Usuario no autenticado'}), 401
+    # Si no, redirige al login normal
+    return redirect(url_for('idvistalogin.vista_login'))
+
 """Rutas"""
 app.register_blueprint(vistarutas)
 
@@ -78,7 +87,6 @@ def logout_view(request):
 def vista_menu():
     #código de validación de control de acceso al menú
     return redirect('menu.html') 
-
 
 if __name__ == '__main__':
     # Corre la aplicación en el modo debug, lo que permitirá

@@ -10,14 +10,13 @@ api = Blueprint('api', __name__)
 @api.route('/api/reaccion', methods=['POST'])
 @login_required
 def api_reaccion():
-    try:
-        if not current_user.is_authenticated:
-            return jsonify({
-                'status': 'error',
-                'message': 'Usuario no autenticado',
-                'redirect': url_for('idvistalogin.vista_login')
-            }), 401
+    if not current_user.is_authenticated:
+        return jsonify({
+            'status': 'error',
+            'message': 'Usuario no autenticado'
+        }), 401
 
+    try:
         data = request.get_json()
         if not data:
             return jsonify({

@@ -1,8 +1,5 @@
-from pprint import pprint
-import requests
-from flask import Blueprint, render_template, request, session, flash, redirect, url_for
+from flask import Blueprint, render_template, flash
 from configBd import *
-import markupsafe
 from control.ControlConexion import ControlConexion
 
 # Crear un Blueprint

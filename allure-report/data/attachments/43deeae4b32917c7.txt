@@ -1,8 +1,0 @@
-Datos de sesión: Usuario Test test_1747668970_6053@test.com test123
-Condiciones: ['Problemas respiratorios']
-Estilo de vida: ['Deportista al aire libre']
-[DEBUG] Intento de login - Usuario: test_1747668970_6053@test.com
-[DEBUG] Login exitoso - Usuario: test_1747668970_6053@test.com
-Número total contaminacion en la base de datos: 2
-Reporte procesado - ID: 101, Lat: 6.2310101, Lon: -75.6114011
-Reporte procesado - ID: 104, Lat: 4.6531094, Lon: -74.0530972
